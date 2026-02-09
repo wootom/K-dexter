@@ -1,3 +1,4 @@
+
 import { AIMessage } from '@langchain/core/messages';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatAnthropic } from '@langchain/anthropic';
@@ -10,10 +11,13 @@ import { StructuredToolInterface } from '@langchain/core/tools';
 import { Runnable } from '@langchain/core/runnables';
 import { z } from 'zod';
 import { DEFAULT_SYSTEM_PROMPT } from '@/agent/prompts';
+import { logDebug } from '../utils/logger.js';
 import type { TokenUsage } from '../agent/types.js';
+import { config } from 'dotenv';
+import { resolve } from 'path';
 
 export const DEFAULT_PROVIDER = 'openai';
-export const DEFAULT_MODEL = 'gpt-5.2';
+export const DEFAULT_MODEL = 'gpt-4o';
 
 // Fast model variants by provider for lightweight tasks like summarization
 const FAST_MODELS: Record<string, string> = {
@@ -53,9 +57,20 @@ interface ModelOpts {
 type ModelFactory = (name: string, opts: ModelOpts) => BaseChatModel;
 
 function getApiKey(envVar: string, providerName: string): string {
-  const apiKey = process.env[envVar];
+  let apiKey = process.env[envVar];
+
+  // Fallback: Try explicit load if missing
   if (!apiKey) {
-    throw new Error(`${envVar} not found in environment variables`);
+    try {
+      config({ path: resolve(process.cwd(), '.env'), override: true });
+      apiKey = process.env[envVar];
+    } catch (e) {
+      // Ignore error
+    }
+  }
+
+  if (!apiKey) {
+    throw new Error(`${envVar} not found in environment variables. Please check your .env file.`);
   }
   return apiKey;
 }
@@ -178,8 +193,10 @@ function buildAnthropicMessages(systemPrompt: string, userPrompt: string) {
 }
 
 export async function callLlm(prompt: string, options: CallLlmOptions = {}): Promise<LlmResult> {
-  const { model = DEFAULT_MODEL, systemPrompt, outputSchema, tools, signal } = options;
+  const { model = DEFAULT_MODEL, systemPrompt, outputSchema, tools, signal: userSignal } = options;
   const finalSystemPrompt = systemPrompt || DEFAULT_SYSTEM_PROMPT;
+
+  logDebug(`[LLM] calling model ${model}. Prompt length: ${prompt.length}`);
 
   const llm = getChatModel(model, false);
 
@@ -192,7 +209,8 @@ export async function callLlm(prompt: string, options: CallLlmOptions = {}): Pro
     runnable = llm.bindTools(tools);
   }
 
-  const invokeOpts = signal ? { signal } : undefined;
+  const signal = userSignal ?? AbortSignal.timeout(60000);
+  const invokeOpts = { signal };
   let result;
 
   if (model.startsWith('claude-')) {
@@ -208,7 +226,9 @@ export async function callLlm(prompt: string, options: CallLlmOptions = {}): Pro
     const chain = promptTemplate.pipe(runnable);
     result = await withRetry(() => chain.invoke({ prompt }, invokeOpts));
   }
+
   const usage = extractUsage(result);
+  logDebug(`[LLM] received response. Usage: ${JSON.stringify(usage)}`);
 
   // If no outputSchema and no tools, extract content from AIMessage
   // When tools are provided, return the full AIMessage to preserve tool_calls

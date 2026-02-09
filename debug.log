@@ -1,0 +1,709 @@
+[2026-02-09T04:31:03.311Z] [KIS] Fetching Daily OHLCV for 000660 (period: 60)...
+[2026-02-09T04:31:03.312Z] Fetching new KIS access token...
+[2026-02-09T04:31:03.658Z] Token fetched successfully.
+[2026-02-09T04:31:03.762Z] [KIS] Daily OHLCV fetched. 54 records.
+[2026-02-09T04:48:10.581Z] Logger initialized
+[2026-02-09T04:48:23.346Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T04:48:23.346Z] [DEBUG] [Agent] Calling model with prompt length: 113 
+[2026-02-09T04:48:23.347Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 113 
+[2026-02-09T04:50:54.703Z] Logger initialized
+[2026-02-09T04:51:11.150Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T04:51:11.150Z] [DEBUG] [Agent] Calling model with prompt length: 113 
+[2026-02-09T04:51:11.150Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 113 
+[2026-02-09T04:51:12.422Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4283,"outputTokens":22,"totalTokens":4305} 
+[2026-02-09T04:51:12.422Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T04:51:12.424Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T04:51:12.424Z] [DEBUG] [Agent] Calling model with prompt length: 2268 
+[2026-02-09T04:51:12.424Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 2268 
+[2026-02-09T05:21:04.867Z] Logger initialized
+[2026-02-09T05:21:18.364Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T05:21:18.365Z] [DEBUG] [Agent] Calling model with prompt length: 113 
+[2026-02-09T05:21:18.365Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 113 
+[2026-02-09T05:21:19.720Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4283,"outputTokens":22,"totalTokens":4305} 
+[2026-02-09T05:21:19.720Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T05:21:19.722Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T05:21:19.722Z] [DEBUG] [Agent] Calling model with prompt length: 2268 
+[2026-02-09T05:21:19.722Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 2268 
+[2026-02-09T05:23:15.729Z] Logger initialized
+[2026-02-09T05:23:29.310Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T05:23:29.310Z] [DEBUG] [Agent] Calling model with prompt length: 113 
+[2026-02-09T05:23:29.311Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 113 
+[2026-02-09T05:23:31.235Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4283,"outputTokens":26,"totalTokens":4309} 
+[2026-02-09T05:23:31.235Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T05:23:31.239Z] [DEBUG] [KIS] Fetching Daily OHLCV for 000660 (period: 60)... 
+[2026-02-09T05:23:31.239Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T05:23:31.599Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T13:55:38.464Z] Logger initialized
+[2026-02-09T13:55:50.608Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T13:55:50.609Z] [DEBUG] [Agent] Calling model with prompt length: 113 
+[2026-02-09T13:55:50.610Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 113 
+[2026-02-09T13:55:54.259Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4283,"outputTokens":26,"totalTokens":4309} 
+[2026-02-09T13:55:54.259Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T13:55:54.263Z] [DEBUG] [KIS] Fetching Daily OHLCV for 000660 (period: 60)... 
+[2026-02-09T13:55:54.263Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T13:55:54.263Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/oauth2/tokenP (timeout: 10000ms) 
+[2026-02-09T13:55:54.620Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/oauth2/tokenP (status: 200) 
+[2026-02-09T13:55:54.620Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T13:55:54.620Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=000660&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (timeout: 10000ms) 
+[2026-02-09T13:55:54.714Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=000660&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (status: 200) 
+[2026-02-09T13:55:54.714Z] [DEBUG] [KIS] Daily OHLCV fetched. 54 records. 
+[2026-02-09T13:55:54.717Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T13:55:54.717Z] [DEBUG] [Agent] Calling model with prompt length: 1049 
+[2026-02-09T13:55:54.717Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1049 
+[2026-02-09T13:56:03.360Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4542,"outputTokens":397,"totalTokens":4939} 
+[2026-02-09T13:56:03.361Z] [DEBUG] [Agent] Model responded. content length: 661 
+[2026-02-09T13:56:03.361Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T13:56:03.362Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 907 
+[2026-02-09T13:56:12.851Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3358,"outputTokens":466,"totalTokens":3824} 
+[2026-02-09T13:56:12.853Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 823 
+[2026-02-09T13:56:17.369Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":535,"outputTokens":121,"totalTokens":656} 
+[2026-02-09T13:59:22.014Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T13:59:22.015Z] [DEBUG] [Agent] Calling model with prompt length: 117 
+[2026-02-09T13:59:22.015Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 117 
+[2026-02-09T13:59:25.928Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4286,"outputTokens":26,"totalTokens":4312} 
+[2026-02-09T13:59:25.928Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T13:59:25.929Z] [DEBUG] [KIS] Fetching Daily OHLCV for 347860 (period: 60)... 
+[2026-02-09T13:59:25.929Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=347860&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (timeout: 10000ms) 
+[2026-02-09T13:59:26.184Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=347860&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (status: 200) 
+[2026-02-09T13:59:26.185Z] [DEBUG] [KIS] Daily OHLCV fetched. 54 records. 
+[2026-02-09T13:59:26.187Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T13:59:26.187Z] [DEBUG] [Agent] Calling model with prompt length: 1043 
+[2026-02-09T13:59:26.187Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1043 
+[2026-02-09T13:59:33.538Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4543,"outputTokens":398,"totalTokens":4941} 
+[2026-02-09T13:59:33.538Z] [DEBUG] [Agent] Model responded. content length: 650 
+[2026-02-09T13:59:33.538Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T13:59:33.538Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 901 
+[2026-02-09T13:59:42.474Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3357,"outputTokens":418,"totalTokens":3775} 
+[2026-02-09T13:59:42.474Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 738 
+[2026-02-09T13:59:45.438Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":480,"outputTokens":111,"totalTokens":591} 
+[2026-02-09T14:01:58.331Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:01:58.331Z] [DEBUG] [Agent] Calling model with prompt length: 149 
+[2026-02-09T14:01:58.332Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 149 
+[2026-02-09T14:02:00.106Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4308,"outputTokens":24,"totalTokens":4332} 
+[2026-02-09T14:02:00.106Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:02:00.111Z] [DEBUG] [KIS] Fetching Investor Trend for 005930... 
+[2026-02-09T14:02:00.111Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-investor?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 (timeout: 10000ms) 
+[2026-02-09T14:02:00.249Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-investor?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 (status: 200) 
+[2026-02-09T14:02:00.250Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:02:00.250Z] [DEBUG] [Agent] Calling model with prompt length: 1049 
+[2026-02-09T14:02:00.250Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1049 
+[2026-02-09T14:02:05.449Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4522,"outputTokens":217,"totalTokens":4739} 
+[2026-02-09T14:02:05.450Z] [DEBUG] [Agent] Model responded. content length: 362 
+[2026-02-09T14:02:05.450Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:02:05.450Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 896 
+[2026-02-09T14:02:08.738Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3338,"outputTokens":203,"totalTokens":3541} 
+[2026-02-09T14:02:08.738Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 435 
+[2026-02-09T14:02:11.297Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":272,"outputTokens":106,"totalTokens":378} 
+[2026-02-09T14:03:15.690Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:03:15.690Z] [DEBUG] [Agent] Calling model with prompt length: 177 
+[2026-02-09T14:03:15.690Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 177 
+[2026-02-09T14:03:20.277Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4328,"outputTokens":53,"totalTokens":4381} 
+[2026-02-09T14:03:20.278Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:20.284Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 157 
+[2026-02-09T14:03:24.557Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":538,"outputTokens":100,"totalTokens":638} 
+[2026-02-09T14:03:24.559Z] [WARN] API call without key: /filings/ (SMCI) 
+[2026-02-09T14:03:26.476Z] [ERROR] API error: /filings/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:03:26.478Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:03:26.478Z] [DEBUG] [Agent] Calling model with prompt length: 784 
+[2026-02-09T14:03:26.478Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 784 
+[2026-02-09T14:03:28.090Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4425,"outputTokens":54,"totalTokens":4479} 
+[2026-02-09T14:03:28.090Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:28.091Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 139 
+[2026-02-09T14:03:29.335Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3099,"outputTokens":22,"totalTokens":3121} 
+[2026-02-09T14:03:29.335Z] [WARN] API call without key: /news/ (SMCI) 
+[2026-02-09T14:03:29.619Z] [ERROR] API error: /news/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:03:29.621Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:03:29.621Z] [DEBUG] [Agent] Calling model with prompt length: 1109 
+[2026-02-09T14:03:29.621Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1109 
+[2026-02-09T14:03:30.904Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4513,"outputTokens":29,"totalTokens":4542} 
+[2026-02-09T14:03:30.904Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:40.320Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T14:03:40.320Z] [DEBUG] [Agent] Calling model with prompt length: 1398 
+[2026-02-09T14:03:40.320Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1398 
+[2026-02-09T14:03:43.225Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4589,"outputTokens":22,"totalTokens":4611} 
+[2026-02-09T14:03:43.225Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:44.439Z] [DEBUG] [Agent] Iteration 4 start 
+[2026-02-09T14:03:44.439Z] [DEBUG] [Agent] Calling model with prompt length: 8745 
+[2026-02-09T14:03:44.439Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 8745 
+[2026-02-09T14:03:45.712Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":6862,"outputTokens":32,"totalTokens":6894} 
+[2026-02-09T14:03:45.712Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:46.757Z] [DEBUG] [Agent] Iteration 5 start 
+[2026-02-09T14:03:46.757Z] [DEBUG] [Agent] Calling model with prompt length: 8869 
+[2026-02-09T14:03:46.757Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 8869 
+[2026-02-09T14:03:51.393Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":6896,"outputTokens":27,"totalTokens":6923} 
+[2026-02-09T14:03:51.393Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:52.994Z] [DEBUG] [Agent] Iteration 6 start 
+[2026-02-09T14:03:52.994Z] [DEBUG] [Agent] Calling model with prompt length: 9022 
+[2026-02-09T14:03:52.994Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 9022 
+[2026-02-09T14:03:55.611Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":6933,"outputTokens":22,"totalTokens":6955} 
+[2026-02-09T14:03:55.611Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:03:57.512Z] [DEBUG] [Agent] Iteration 7 start 
+[2026-02-09T14:03:57.513Z] [DEBUG] [Agent] Calling model with prompt length: 75452 
+[2026-02-09T14:03:57.537Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 75452 
+[2026-02-09T14:03:59.424Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":29560,"outputTokens":27,"totalTokens":29587} 
+[2026-02-09T14:03:59.424Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:04:07.643Z] [DEBUG] [Agent] Iteration 8 start 
+[2026-02-09T14:04:07.644Z] [DEBUG] [Agent] Calling model with prompt length: 77557 
+[2026-02-09T14:04:07.644Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 77557 
+[2026-02-09T14:04:09.338Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":30278,"outputTokens":27,"totalTokens":30305} 
+[2026-02-09T14:04:09.339Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:04:11.188Z] [DEBUG] [Agent] Iteration 9 start 
+[2026-02-09T14:04:11.188Z] [DEBUG] [Agent] Calling model with prompt length: 77711 
+[2026-02-09T14:04:11.188Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 77711 
+[2026-02-09T14:04:12.668Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":30315,"outputTokens":22,"totalTokens":30337} 
+[2026-02-09T14:04:12.668Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:04:13.910Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 188447 
+[2026-02-09T14:04:23.778Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":63574,"outputTokens":478,"totalTokens":64052} 
+[2026-02-09T14:04:23.780Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1075 
+[2026-02-09T14:04:28.501Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":549,"outputTokens":149,"totalTokens":698} 
+[2026-02-09T14:08:32.950Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:08:32.950Z] [DEBUG] [Agent] Calling model with prompt length: 175 
+[2026-02-09T14:08:32.950Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 175 
+[2026-02-09T14:08:35.220Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4328,"outputTokens":43,"totalTokens":4371} 
+[2026-02-09T14:08:35.220Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:08:35.413Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:08:35.413Z] [DEBUG] [Agent] Calling model with prompt length: 945 
+[2026-02-09T14:08:35.413Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 945 
+[2026-02-09T14:08:36.719Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4510,"outputTokens":43,"totalTokens":4553} 
+[2026-02-09T14:08:36.719Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:08:36.868Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:08:36.868Z] [DEBUG] [Agent] Calling model with prompt length: 1338 
+[2026-02-09T14:08:36.869Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1338 
+[2026-02-09T14:08:38.283Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4654,"outputTokens":43,"totalTokens":4697} 
+[2026-02-09T14:08:38.283Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:08:38.479Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T14:08:38.479Z] [DEBUG] [Agent] Calling model with prompt length: 1755 
+[2026-02-09T14:08:38.480Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1755 
+[2026-02-09T14:08:41.405Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4801,"outputTokens":123,"totalTokens":4924} 
+[2026-02-09T14:08:41.405Z] [DEBUG] [Agent] Model responded. content length: 195 
+[2026-02-09T14:08:41.405Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:08:41.405Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 1776 
+[2026-02-09T14:08:43.411Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3697,"outputTokens":78,"totalTokens":3775} 
+[2026-02-09T14:08:43.412Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 207 
+[2026-02-09T14:08:44.837Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":140,"outputTokens":73,"totalTokens":213} 
+[2026-02-09T14:10:24.745Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:10:24.746Z] [DEBUG] [Agent] Calling model with prompt length: 201 
+[2026-02-09T14:10:24.746Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 201 
+[2026-02-09T14:10:26.287Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4348,"outputTokens":48,"totalTokens":4396} 
+[2026-02-09T14:10:26.288Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:10:26.289Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 47 
+[2026-02-09T14:10:34.175Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3093,"outputTokens":306,"totalTokens":3399} 
+[2026-02-09T14:10:34.176Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:10:34.176Z] [DEBUG] [Agent] Calling model with prompt length: 680 
+[2026-02-09T14:10:34.176Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 680 
+[2026-02-09T14:10:35.500Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4417,"outputTokens":32,"totalTokens":4449} 
+[2026-02-09T14:10:35.501Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:10:46.911Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:10:46.911Z] [DEBUG] [Agent] Calling model with prompt length: 982 
+[2026-02-09T14:10:46.911Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 982 
+[2026-02-09T14:10:48.126Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4503,"outputTokens":22,"totalTokens":4525} 
+[2026-02-09T14:10:48.127Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:11:03.409Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T14:11:03.409Z] [DEBUG] [Agent] Calling model with prompt length: 136152 
+[2026-02-09T14:11:03.409Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 136152 
+[2026-02-09T14:11:08.321Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":54642,"outputTokens":233,"totalTokens":54875} 
+[2026-02-09T14:11:08.321Z] [DEBUG] [Agent] Model responded. content length: 379 
+[2026-02-09T14:11:08.321Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:11:08.324Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 203217 
+[2026-02-09T14:11:14.016Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":72419,"outputTokens":240,"totalTokens":72659} 
+[2026-02-09T14:11:14.017Z] [DEBUG] [LLM] calling model gpt-5.2. Prompt length: 480 
+[2026-02-09T14:11:16.498Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":307,"outputTokens":160,"totalTokens":467} 
+[2026-02-09T14:16:28.497Z] Logger initialized
+[2026-02-09T14:23:48.434Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:23:48.434Z] [DEBUG] [Agent] Calling model with prompt length: 81 
+[2026-02-09T14:23:48.435Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 81 
+[2026-02-09T14:23:49.505Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4181,"outputTokens":18,"totalTokens":4199} 
+[2026-02-09T14:23:49.505Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:23:49.511Z] [DEBUG] [KIS] Fetching current price for 033540... 
+[2026-02-09T14:23:49.511Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T14:23:49.512Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/oauth2/tokenP (timeout: 10000ms) 
+[2026-02-09T14:23:49.732Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/oauth2/tokenP (status: 200) 
+[2026-02-09T14:23:49.733Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T14:23:49.733Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=033540 (timeout: 10000ms) 
+[2026-02-09T14:23:49.881Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=033540 (status: 200) 
+[2026-02-09T14:23:49.882Z] [DEBUG] [KIS] Current price fetched. 
+[2026-02-09T14:23:49.883Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:23:49.883Z] [DEBUG] [Agent] Calling model with prompt length: 2418 
+[2026-02-09T14:23:49.883Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2418 
+[2026-02-09T14:23:51.673Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5063,"outputTokens":64,"totalTokens":5127} 
+[2026-02-09T14:23:51.673Z] [DEBUG] [Agent] Model responded. content length: 97 
+[2026-02-09T14:23:51.673Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:23:51.673Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2436 
+[2026-02-09T14:23:52.973Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4131,"outputTokens":66,"totalTokens":4197} 
+[2026-02-09T14:23:52.973Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 188 
+[2026-02-09T14:23:54.172Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":130,"outputTokens":40,"totalTokens":170} 
+[2026-02-09T14:24:36.398Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:24:36.398Z] [DEBUG] [Agent] Calling model with prompt length: 119 
+[2026-02-09T14:24:36.398Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 119 
+[2026-02-09T14:24:40.122Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4201,"outputTokens":122,"totalTokens":4323} 
+[2026-02-09T14:24:40.122Z] [DEBUG] [Agent] Model responded. content length: 609 
+[2026-02-09T14:24:40.122Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:24:40.123Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 705 
+[2026-02-09T14:24:41.573Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":191,"outputTokens":60,"totalTokens":251} 
+[2026-02-09T14:29:36.367Z] Logger initialized
+[2026-02-09T14:30:07.600Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:30:07.600Z] [DEBUG] [Agent] Calling model with prompt length: 129 
+[2026-02-09T14:30:07.600Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 129 
+[2026-02-09T14:30:09.674Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4579,"outputTokens":26,"totalTokens":4605} 
+[2026-02-09T14:30:09.674Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:30:09.677Z] [DEBUG] [KIS] Fetching US Daily OHLCV for AAPL (NAS)... 
+[2026-02-09T14:30:09.678Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T14:30:09.678Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/oauth2/tokenP (timeout: 10000ms) 
+[2026-02-09T14:30:09.876Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/oauth2/tokenP (status: 200) 
+[2026-02-09T14:30:09.876Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T14:30:09.876Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=AAPL&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:30:09.955Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=AAPL&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:30:09.959Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:30:09.959Z] [DEBUG] [Agent] Calling model with prompt length: 1112 
+[2026-02-09T14:30:09.959Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1112 
+[2026-02-09T14:30:14.159Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4868,"outputTokens":235,"totalTokens":5103} 
+[2026-02-09T14:30:14.159Z] [DEBUG] [Agent] Model responded. content length: 710 
+[2026-02-09T14:30:14.159Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:30:14.160Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 976 
+[2026-02-09T14:30:17.077Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3488,"outputTokens":145,"totalTokens":3633} 
+[2026-02-09T14:30:17.078Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 655 
+[2026-02-09T14:30:18.832Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":212,"outputTokens":43,"totalTokens":255} 
+[2026-02-09T14:36:09.540Z] Logger initialized
+[2026-02-09T14:36:22.931Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:36:22.932Z] [DEBUG] [Agent] Calling model with prompt length: 89 
+[2026-02-09T14:36:22.932Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 89 
+[2026-02-09T14:36:24.162Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4582,"outputTokens":26,"totalTokens":4608} 
+[2026-02-09T14:36:24.162Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:36:24.166Z] [DEBUG] [KIS] Fetching US Daily OHLCV for TSLA (NAS)... 
+[2026-02-09T14:36:24.166Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T14:36:24.166Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/oauth2/tokenP (timeout: 10000ms) 
+[2026-02-09T14:36:24.421Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/oauth2/tokenP (status: 200) 
+[2026-02-09T14:36:24.421Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T14:36:24.421Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=TSLA&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:36:24.531Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=TSLA&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:36:24.534Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:36:24.534Z] [DEBUG] [Agent] Calling model with prompt length: 1088 
+[2026-02-09T14:36:24.534Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1088 
+[2026-02-09T14:36:28.487Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4871,"outputTokens":201,"totalTokens":5072} 
+[2026-02-09T14:36:28.487Z] [DEBUG] [Agent] Model responded. content length: 660 
+[2026-02-09T14:36:28.488Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:36:28.488Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 952 
+[2026-02-09T14:36:30.875Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3489,"outputTokens":92,"totalTokens":3581} 
+[2026-02-09T14:36:30.876Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 258 
+[2026-02-09T14:36:32.062Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":157,"outputTokens":47,"totalTokens":204} 
+[2026-02-09T14:37:52.934Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:37:52.934Z] [DEBUG] [Agent] Calling model with prompt length: 109 
+[2026-02-09T14:37:52.934Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 109 
+[2026-02-09T14:37:53.594Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4595,"outputTokens":18,"totalTokens":4613} 
+[2026-02-09T14:37:53.594Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:37:53.600Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 25 
+[2026-02-09T14:37:55.724Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1760,"outputTokens":91,"totalTokens":1851} 
+[2026-02-09T14:37:55.724Z] [WARN] API call without key: /financials/ (TSLA) 
+[2026-02-09T14:37:57.124Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:37:57.124Z] [DEBUG] [Agent] Calling model with prompt length: 13695 
+[2026-02-09T14:37:57.124Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 13695 
+[2026-02-09T14:38:01.457Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":8485,"outputTokens":210,"totalTokens":8695} 
+[2026-02-09T14:38:01.457Z] [DEBUG] [Agent] Model responded. content length: 727 
+[2026-02-09T14:38:01.457Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:38:01.458Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 18479 
+[2026-02-09T14:38:08.532Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":8270,"outputTokens":304,"totalTokens":8574} 
+[2026-02-09T14:38:08.532Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1251 
+[2026-02-09T14:38:09.318Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":371,"outputTokens":33,"totalTokens":404} 
+[2026-02-09T14:38:32.286Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:38:32.286Z] [DEBUG] [Agent] Calling model with prompt length: 123 
+[2026-02-09T14:38:32.286Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 123 
+[2026-02-09T14:38:34.460Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4606,"outputTokens":31,"totalTokens":4637} 
+[2026-02-09T14:38:34.460Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:38:34.460Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 23 
+[2026-02-09T14:38:37.413Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1773,"outputTokens":38,"totalTokens":1811} 
+[2026-02-09T14:38:37.413Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:38:37.414Z] [DEBUG] [Agent] Calling model with prompt length: 655 
+[2026-02-09T14:38:37.414Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 655 
+[2026-02-09T14:38:38.513Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4715,"outputTokens":31,"totalTokens":4746} 
+[2026-02-09T14:38:38.514Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:38:38.514Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 23 
+[2026-02-09T14:38:40.706Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1773,"outputTokens":97,"totalTokens":1870} 
+[2026-02-09T14:38:40.706Z] [WARN] API call without key: /financials/ (ALCHERA) 
+[2026-02-09T14:38:41.018Z] [ERROR] API error: /financials/ (ALCHERA) — 400 Bad Request 
+[2026-02-09T14:38:41.019Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:38:41.019Z] [DEBUG] [Agent] Calling model with prompt length: 874 
+[2026-02-09T14:38:41.019Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 874 
+[2026-02-09T14:38:42.487Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4783,"outputTokens":34,"totalTokens":4817} 
+[2026-02-09T14:38:42.487Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:38:42.599Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T14:38:42.599Z] [DEBUG] [Agent] Calling model with prompt length: 1038 
+[2026-02-09T14:38:42.599Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1038 
+[2026-02-09T14:38:44.195Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4840,"outputTokens":28,"totalTokens":4868} 
+[2026-02-09T14:38:44.196Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:38:44.196Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 20 
+[2026-02-09T14:38:45.863Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1770,"outputTokens":76,"totalTokens":1846} 
+[2026-02-09T14:38:45.864Z] [DEBUG] [Agent] Iteration 4 start 
+[2026-02-09T14:38:45.864Z] [DEBUG] [Agent] Calling model with prompt length: 1164 
+[2026-02-09T14:38:45.864Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1164 
+[2026-02-09T14:38:50.929Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4877,"outputTokens":206,"totalTokens":5083} 
+[2026-02-09T14:38:50.929Z] [DEBUG] [Agent] Model responded. content length: 1123 
+[2026-02-09T14:38:50.929Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:38:50.930Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 945 
+[2026-02-09T14:38:51.941Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3465,"outputTokens":36,"totalTokens":3501} 
+[2026-02-09T14:38:51.942Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 156 
+[2026-02-09T14:38:52.646Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":103,"outputTokens":28,"totalTokens":131} 
+[2026-02-09T14:39:33.121Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:39:33.122Z] [DEBUG] [Agent] Calling model with prompt length: 137 
+[2026-02-09T14:39:33.122Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 137 
+[2026-02-09T14:39:34.211Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4618,"outputTokens":20,"totalTokens":4638} 
+[2026-02-09T14:39:34.211Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:39:34.213Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:39:34.213Z] [DEBUG] [Agent] Calling model with prompt length: 2415 
+[2026-02-09T14:39:34.213Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2415 
+[2026-02-09T14:39:40.782Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5193,"outputTokens":312,"totalTokens":5505} 
+[2026-02-09T14:39:40.783Z] [DEBUG] [Agent] Model responded. content length: 1117 
+[2026-02-09T14:39:40.783Z] [DEBUG] [KIS] Fetching US Daily OHLCV for TSLA (NAS)... 
+[2026-02-09T14:39:40.783Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=TSLA&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:39:40.910Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=TSLA&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:39:40.913Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 53 
+[2026-02-09T14:39:42.299Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2985,"outputTokens":129,"totalTokens":3114} 
+[2026-02-09T14:39:42.300Z] [WARN] API call without key: /news/ (TSLA) 
+[2026-02-09T14:39:42.300Z] [WARN] API call without key: /financial-metrics/snapshot/ (TSLA) 
+[2026-02-09T14:39:42.300Z] [WARN] API call without key: /financials/income-statements/ (TSLA) 
+[2026-02-09T14:39:42.300Z] [WARN] API call without key: /financials/balance-sheets/ (TSLA) 
+[2026-02-09T14:39:42.300Z] [WARN] API call without key: /financials/cash-flow-statements/ (TSLA) 
+[2026-02-09T14:39:43.392Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 47 
+[2026-02-09T14:39:46.736Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2985,"outputTokens":197,"totalTokens":3182} 
+[2026-02-09T14:39:46.737Z] [WARN] API call without key: /prices/ (TSLA) 
+[2026-02-09T14:39:46.737Z] [WARN] API call without key: /analyst-estimates/ (TSLA) 
+[2026-02-09T14:39:46.737Z] [WARN] API call without key: /insider-trades/ (TSLA) 
+[2026-02-09T14:39:47.923Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:39:47.923Z] [DEBUG] [Agent] Calling model with prompt length: 243600 
+[2026-02-09T14:39:47.923Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 243600 
+[2026-02-09T14:40:12.379Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":93758,"outputTokens":249,"totalTokens":94007} 
+[2026-02-09T14:40:12.381Z] [DEBUG] [Agent] Model responded. content length: 1028 
+[2026-02-09T14:40:12.381Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:40:12.386Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 377798 
+[2026-02-09T14:44:49.831Z] Logger initialized
+[2026-02-09T14:45:14.195Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:45:14.195Z] [DEBUG] [Agent] Calling model with prompt length: 83 
+[2026-02-09T14:45:14.196Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 83 
+[2026-02-09T14:45:15.627Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4578,"outputTokens":25,"totalTokens":4603} 
+[2026-02-09T14:45:15.627Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:15.629Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 51 
+[2026-02-09T14:45:16.500Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2989,"outputTokens":16,"totalTokens":3005} 
+[2026-02-09T14:45:16.501Z] [WARN] API call without key: /prices/snapshot/ (SMCI) 
+[2026-02-09T14:45:17.667Z] [ERROR] API error: /prices/snapshot/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:45:17.668Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:45:17.668Z] [DEBUG] [Agent] Calling model with prompt length: 754 
+[2026-02-09T14:45:17.669Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 754 
+[2026-02-09T14:45:19.374Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4726,"outputTokens":19,"totalTokens":4745} 
+[2026-02-09T14:45:19.374Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:19.375Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 24 
+[2026-02-09T14:45:21.580Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2983,"outputTokens":16,"totalTokens":2999} 
+[2026-02-09T14:45:21.580Z] [WARN] API call without key: /prices/snapshot/ (SMCI) 
+[2026-02-09T14:45:22.069Z] [ERROR] API error: /prices/snapshot/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:45:22.069Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:45:22.069Z] [DEBUG] [Agent] Calling model with prompt length: 933 
+[2026-02-09T14:45:22.070Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 933 
+[2026-02-09T14:45:22.964Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4770,"outputTokens":25,"totalTokens":4795} 
+[2026-02-09T14:45:22.964Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:22.965Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 51 
+[2026-02-09T14:45:23.845Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2989,"outputTokens":16,"totalTokens":3005} 
+[2026-02-09T14:45:23.846Z] [WARN] API call without key: /prices/snapshot/ (SMCI) 
+[2026-02-09T14:45:24.352Z] [ERROR] API error: /prices/snapshot/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:45:24.352Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T14:45:24.352Z] [DEBUG] [Agent] Calling model with prompt length: 1165 
+[2026-02-09T14:45:24.352Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1165 
+[2026-02-09T14:45:25.664Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4825,"outputTokens":25,"totalTokens":4850} 
+[2026-02-09T14:45:25.664Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:25.664Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 51 
+[2026-02-09T14:45:28.025Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2989,"outputTokens":35,"totalTokens":3024} 
+[2026-02-09T14:45:28.026Z] [WARN] API call without key: /prices/snapshot/ (SMCI) 
+[2026-02-09T14:45:28.298Z] [ERROR] API error: /prices/snapshot/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:45:28.298Z] [DEBUG] [Agent] Iteration 4 start 
+[2026-02-09T14:45:28.298Z] [DEBUG] [Agent] Calling model with prompt length: 1371 
+[2026-02-09T14:45:28.298Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1371 
+[2026-02-09T14:45:29.225Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4875,"outputTokens":22,"totalTokens":4897} 
+[2026-02-09T14:45:29.225Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:29.228Z] [DEBUG] [KIS] Fetching US current price for SMCI (NYS)... 
+[2026-02-09T14:45:29.228Z] [DEBUG] Fetching new KIS access token... 
+[2026-02-09T14:45:29.228Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/oauth2/tokenP (timeout: 10000ms) 
+[2026-02-09T14:45:29.619Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/oauth2/tokenP (status: 200) 
+[2026-02-09T14:45:29.619Z] [DEBUG] Token fetched successfully. 
+[2026-02-09T14:45:29.619Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NYS&SYMB=SMCI (timeout: 10000ms) 
+[2026-02-09T14:45:29.748Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NYS&SYMB=SMCI (status: 200) 
+[2026-02-09T14:45:29.748Z] [DEBUG] [Agent] Iteration 5 start 
+[2026-02-09T14:45:29.748Z] [DEBUG] [Agent] Calling model with prompt length: 1524 
+[2026-02-09T14:45:29.748Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1524 
+[2026-02-09T14:45:30.842Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4920,"outputTokens":21,"totalTokens":4941} 
+[2026-02-09T14:45:30.842Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:45:30.843Z] [DEBUG] [KIS] Fetching US current price for SMCI (NAS)... 
+[2026-02-09T14:45:30.843Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NAS&SYMB=SMCI (timeout: 10000ms) 
+[2026-02-09T14:45:30.955Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NAS&SYMB=SMCI (status: 200) 
+[2026-02-09T14:45:30.956Z] [DEBUG] [Agent] Iteration 6 start 
+[2026-02-09T14:45:30.956Z] [DEBUG] [Agent] Calling model with prompt length: 1661 
+[2026-02-09T14:45:30.956Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1661 
+[2026-02-09T14:45:31.957Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4965,"outputTokens":38,"totalTokens":5003} 
+[2026-02-09T14:45:31.957Z] [DEBUG] [Agent] Model responded. content length: 124 
+[2026-02-09T14:45:31.957Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:45:31.958Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1717 
+[2026-02-09T14:45:33.269Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3650,"outputTokens":42,"totalTokens":3692} 
+[2026-02-09T14:45:33.269Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 233 
+[2026-02-09T14:45:34.362Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":106,"outputTokens":34,"totalTokens":140} 
+[2026-02-09T14:46:19.482Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:46:19.482Z] [DEBUG] [Agent] Calling model with prompt length: 138 
+[2026-02-09T14:46:19.482Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 138 
+[2026-02-09T14:46:20.864Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4613,"outputTokens":62,"totalTokens":4675} 
+[2026-02-09T14:46:20.865Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:46:20.865Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 36 
+[2026-02-09T14:46:24.266Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1762,"outputTokens":81,"totalTokens":1843} 
+[2026-02-09T14:46:24.266Z] [WARN] API call without key: /financials/ (SMCI) 
+[2026-02-09T14:46:25.068Z] [ERROR] API error: /financials/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:46:25.069Z] [DEBUG] [KIS] Fetching US Daily OHLCV for SMCI (NAS)... 
+[2026-02-09T14:46:25.069Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:46:25.210Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:46:25.213Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:46:25.214Z] [DEBUG] [Agent] Calling model with prompt length: 1394 
+[2026-02-09T14:46:25.214Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1394 
+[2026-02-09T14:46:31.388Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4958,"outputTokens":270,"totalTokens":5228} 
+[2026-02-09T14:46:31.388Z] [DEBUG] [Agent] Model responded. content length: 1068 
+[2026-02-09T14:46:31.388Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:46:31.389Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1342 
+[2026-02-09T14:46:34.468Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3604,"outputTokens":139,"totalTokens":3743} 
+[2026-02-09T14:46:34.468Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 733 
+[2026-02-09T14:46:36.320Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":216,"outputTokens":49,"totalTokens":265} 
+[2026-02-09T14:48:17.630Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:48:17.631Z] [DEBUG] [Agent] Calling model with prompt length: 174 
+[2026-02-09T14:48:17.631Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 174 
+[2026-02-09T14:48:19.637Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4634,"outputTokens":81,"totalTokens":4715} 
+[2026-02-09T14:48:19.637Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:48:19.638Z] [DEBUG] [KIS] Fetching US current price for SMCI (NAS)... 
+[2026-02-09T14:48:19.638Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NAS&SYMB=SMCI (timeout: 10000ms) 
+[2026-02-09T14:48:19.746Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/price?AUTH=&EXCD=NAS&SYMB=SMCI (status: 200) 
+[2026-02-09T14:48:19.747Z] [DEBUG] [KIS] Fetching US Daily OHLCV for SMCI (NAS)... 
+[2026-02-09T14:48:19.747Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:48:19.805Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:48:19.806Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 25 
+[2026-02-09T14:48:20.778Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2982,"outputTokens":27,"totalTokens":3009} 
+[2026-02-09T14:48:20.778Z] [WARN] API call without key: /financials/ (SMCI) 
+[2026-02-09T14:48:22.127Z] [ERROR] API error: /financials/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:48:22.128Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:48:22.128Z] [DEBUG] [Agent] Calling model with prompt length: 1547 
+[2026-02-09T14:48:22.128Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1547 
+[2026-02-09T14:48:27.220Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5013,"outputTokens":150,"totalTokens":5163} 
+[2026-02-09T14:48:27.220Z] [DEBUG] [Agent] Model responded. content length: 282 
+[2026-02-09T14:48:27.221Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:48:27.221Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1492 
+[2026-02-09T14:48:31.281Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3667,"outputTokens":144,"totalTokens":3811} 
+[2026-02-09T14:48:31.281Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 374 
+[2026-02-09T14:48:32.432Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":222,"outputTokens":49,"totalTokens":271} 
+[2026-02-09T14:49:31.180Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:49:31.180Z] [DEBUG] [Agent] Calling model with prompt length: 181 
+[2026-02-09T14:49:31.180Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 181 
+[2026-02-09T14:49:35.777Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4636,"outputTokens":58,"totalTokens":4694} 
+[2026-02-09T14:49:35.777Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:49:35.778Z] [DEBUG] [KIS] Fetching US Daily OHLCV for SMCI (NAS)... 
+[2026-02-09T14:49:35.778Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T14:49:35.902Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=SMCI&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T14:49:35.904Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 29 
+[2026-02-09T14:49:38.227Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":1762,"outputTokens":95,"totalTokens":1857} 
+[2026-02-09T14:49:38.227Z] [WARN] API call without key: /financials/ (SMCI) 
+[2026-02-09T14:49:38.931Z] [ERROR] API error: /financials/ (SMCI) — 401 Unauthorized 
+[2026-02-09T14:49:38.932Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:49:38.932Z] [DEBUG] [Agent] Calling model with prompt length: 1362 
+[2026-02-09T14:49:38.932Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1362 
+[2026-02-09T14:49:43.416Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4944,"outputTokens":216,"totalTokens":5160} 
+[2026-02-09T14:49:43.417Z] [DEBUG] [Agent] Model responded. content length: 819 
+[2026-02-09T14:49:43.417Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:49:43.417Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1316 
+[2026-02-09T14:49:47.763Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3591,"outputTokens":135,"totalTokens":3726} 
+[2026-02-09T14:49:47.763Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 332 
+[2026-02-09T14:49:49.238Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":203,"outputTokens":43,"totalTokens":246} 
+[2026-02-09T14:50:28.018Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:50:28.018Z] [DEBUG] [Agent] Calling model with prompt length: 198 
+[2026-02-09T14:50:28.018Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 198 
+[2026-02-09T14:50:29.445Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4647,"outputTokens":20,"totalTokens":4667} 
+[2026-02-09T14:50:29.445Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:50:29.447Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T14:50:29.447Z] [DEBUG] [Agent] Calling model with prompt length: 2423 
+[2026-02-09T14:50:29.447Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2423 
+[2026-02-09T14:50:31.176Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5194,"outputTokens":98,"totalTokens":5292} 
+[2026-02-09T14:50:31.176Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T14:50:31.249Z] [DEBUG] [KIS] Fetching Daily OHLCV for 005930 (period: 60)... 
+[2026-02-09T14:50:31.249Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (timeout: 10000ms) 
+[2026-02-09T14:50:31.454Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (status: 200) 
+[2026-02-09T14:50:31.454Z] [DEBUG] [KIS] Daily OHLCV fetched. 54 records. 
+[2026-02-09T14:50:31.456Z] [DEBUG] [KIS] Fetching Investor Trend for 005930... 
+[2026-02-09T14:50:31.456Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-investor?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 (timeout: 10000ms) 
+[2026-02-09T14:50:31.542Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-investor?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=005930 (status: 200) 
+[2026-02-09T14:50:31.628Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T14:50:31.628Z] [DEBUG] [Agent] Calling model with prompt length: 3706 
+[2026-02-09T14:50:31.628Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 3706 
+[2026-02-09T14:50:39.193Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5621,"outputTokens":276,"totalTokens":5897} 
+[2026-02-09T14:50:39.194Z] [DEBUG] [Agent] Model responded. content length: 1243 
+[2026-02-09T14:50:39.194Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:50:39.195Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 3594 
+[2026-02-09T14:50:48.562Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4255,"outputTokens":363,"totalTokens":4618} 
+[2026-02-09T14:50:48.563Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 774 
+[2026-02-09T14:50:50.068Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":430,"outputTokens":44,"totalTokens":474} 
+[2026-02-09T14:53:19.302Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T14:53:19.302Z] [DEBUG] [Agent] Calling model with prompt length: 271 
+[2026-02-09T14:53:19.302Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 271 
+[2026-02-09T14:53:22.604Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4690,"outputTokens":76,"totalTokens":4766} 
+[2026-02-09T14:53:22.604Z] [DEBUG] [Agent] Model responded. content length: 156 
+[2026-02-09T14:53:22.604Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T14:53:22.604Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 273 
+[2026-02-09T14:53:23.867Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":158,"outputTokens":43,"totalTokens":201} 
+[2026-02-09T15:09:21.178Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T15:09:21.178Z] [DEBUG] [Agent] Calling model with prompt length: 249 
+[2026-02-09T15:09:21.179Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 249 
+[2026-02-09T15:09:22.413Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4678,"outputTokens":20,"totalTokens":4698} 
+[2026-02-09T15:09:22.413Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:22.414Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 27 
+[2026-02-09T15:09:23.453Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2984,"outputTokens":19,"totalTokens":3003} 
+[2026-02-09T15:09:23.459Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:24.868Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:24.870Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T15:09:24.870Z] [DEBUG] [Agent] Calling model with prompt length: 734 
+[2026-02-09T15:09:24.870Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 734 
+[2026-02-09T15:09:25.883Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4725,"outputTokens":20,"totalTokens":4745} 
+[2026-02-09T15:09:25.883Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:25.884Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 27 
+[2026-02-09T15:09:27.258Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2984,"outputTokens":19,"totalTokens":3003} 
+[2026-02-09T15:09:27.258Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:27.537Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:27.538Z] [DEBUG] [Agent] Iteration 2 start 
+[2026-02-09T15:09:27.538Z] [DEBUG] [Agent] Calling model with prompt length: 921 
+[2026-02-09T15:09:27.538Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 921 
+[2026-02-09T15:09:29.382Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4773,"outputTokens":19,"totalTokens":4792} 
+[2026-02-09T15:09:29.382Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:29.383Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 19 
+[2026-02-09T15:09:30.037Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2983,"outputTokens":19,"totalTokens":3002} 
+[2026-02-09T15:09:30.038Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:30.324Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:30.325Z] [DEBUG] [Agent] Iteration 3 start 
+[2026-02-09T15:09:30.325Z] [DEBUG] [Agent] Calling model with prompt length: 1126 
+[2026-02-09T15:09:30.325Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1126 
+[2026-02-09T15:09:31.436Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4825,"outputTokens":19,"totalTokens":4844} 
+[2026-02-09T15:09:31.436Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:31.437Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 19 
+[2026-02-09T15:09:32.663Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2983,"outputTokens":19,"totalTokens":3002} 
+[2026-02-09T15:09:32.663Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:33.228Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:33.229Z] [DEBUG] [Agent] Iteration 4 start 
+[2026-02-09T15:09:33.229Z] [DEBUG] [Agent] Calling model with prompt length: 1305 
+[2026-02-09T15:09:33.229Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1305 
+[2026-02-09T15:09:33.979Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4872,"outputTokens":20,"totalTokens":4892} 
+[2026-02-09T15:09:33.979Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:33.979Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 27 
+[2026-02-09T15:09:34.740Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2984,"outputTokens":19,"totalTokens":3003} 
+[2026-02-09T15:09:34.740Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:35.026Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:35.026Z] [DEBUG] [Agent] Iteration 5 start 
+[2026-02-09T15:09:35.026Z] [DEBUG] [Agent] Calling model with prompt length: 1492 
+[2026-02-09T15:09:35.026Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1492 
+[2026-02-09T15:09:35.690Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4920,"outputTokens":20,"totalTokens":4940} 
+[2026-02-09T15:09:35.690Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:35.691Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 27 
+[2026-02-09T15:09:36.457Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2984,"outputTokens":19,"totalTokens":3003} 
+[2026-02-09T15:09:36.457Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:36.842Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:36.843Z] [DEBUG] [Agent] Iteration 6 start 
+[2026-02-09T15:09:36.843Z] [DEBUG] [Agent] Calling model with prompt length: 1679 
+[2026-02-09T15:09:36.843Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1679 
+[2026-02-09T15:09:37.669Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4968,"outputTokens":19,"totalTokens":4987} 
+[2026-02-09T15:09:37.670Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:09:37.670Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 19 
+[2026-02-09T15:09:38.555Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2983,"outputTokens":19,"totalTokens":3002} 
+[2026-02-09T15:09:38.555Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:09:38.848Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:09:38.849Z] [DEBUG] [Agent] Iteration 7 start 
+[2026-02-09T15:09:38.849Z] [DEBUG] [Agent] Calling model with prompt length: 1858 
+[2026-02-09T15:09:38.849Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1858 
+[2026-02-09T15:09:40.652Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5015,"outputTokens":32,"totalTokens":5047} 
+[2026-02-09T15:09:40.652Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:10:15.532Z] [DEBUG] [Agent] Iteration 8 start 
+[2026-02-09T15:10:15.532Z] [DEBUG] [Agent] Calling model with prompt length: 2155 
+[2026-02-09T15:10:15.532Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2155 
+[2026-02-09T15:10:16.455Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5110,"outputTokens":20,"totalTokens":5130} 
+[2026-02-09T15:10:16.455Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:10:16.457Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 30 
+[2026-02-09T15:10:17.276Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2984,"outputTokens":19,"totalTokens":3003} 
+[2026-02-09T15:10:17.276Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:10:18.624Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:10:18.625Z] [DEBUG] [Agent] Iteration 9 start 
+[2026-02-09T15:10:18.625Z] [DEBUG] [Agent] Calling model with prompt length: 2345 
+[2026-02-09T15:10:18.625Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 2345 
+[2026-02-09T15:10:20.250Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":5157,"outputTokens":25,"totalTokens":5182} 
+[2026-02-09T15:10:20.251Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T15:10:20.251Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 52 
+[2026-02-09T15:10:20.979Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":2989,"outputTokens":19,"totalTokens":3008} 
+[2026-02-09T15:10:20.979Z] [WARN] API call without key: /financial-metrics/snapshot/ (SBUX) 
+[2026-02-09T15:10:21.291Z] [ERROR] API error: /financial-metrics/snapshot/ (SBUX) — 401 Unauthorized 
+[2026-02-09T15:10:21.292Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 3048 
+[2026-02-09T15:10:22.971Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4019,"outputTokens":50,"totalTokens":4069} 
+[2026-02-09T15:10:22.971Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 321 
+[2026-02-09T15:10:23.784Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":114,"outputTokens":31,"totalTokens":145} 
+[2026-02-09T23:05:24.018Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T23:05:24.019Z] [DEBUG] [Agent] Calling model with prompt length: 267 
+[2026-02-09T23:05:24.019Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 267 
+[2026-02-09T23:05:27.227Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4691,"outputTokens":19,"totalTokens":4710} 
+[2026-02-09T23:05:27.228Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T23:05:27.230Z] [DEBUG] [KIS] Fetching Daily OHLCV for 457030 (period: 60)... 
+[2026-02-09T23:05:27.230Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=457030&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (timeout: 10000ms) 
+[2026-02-09T23:05:27.632Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=457030&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (status: 200) 
+[2026-02-09T23:05:27.632Z] [DEBUG] [KIS] Daily OHLCV fetched. 0 records. 
+[2026-02-09T23:05:27.634Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T23:05:27.634Z] [DEBUG] [Agent] Calling model with prompt length: 637 
+[2026-02-09T23:05:27.634Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 637 
+[2026-02-09T23:05:29.528Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4704,"outputTokens":35,"totalTokens":4739} 
+[2026-02-09T23:05:29.528Z] [DEBUG] [Agent] Model responded. content length: 182 
+[2026-02-09T23:05:29.528Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T23:05:29.529Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 326 
+[2026-02-09T23:05:31.696Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3247,"outputTokens":56,"totalTokens":3303} 
+[2026-02-09T23:05:31.696Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 209 
+[2026-02-09T23:05:32.648Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":122,"outputTokens":38,"totalTokens":160} 
+[2026-02-09T23:08:15.354Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T23:08:15.354Z] [DEBUG] [Agent] Calling model with prompt length: 294 
+[2026-02-09T23:08:15.354Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 294 
+[2026-02-09T23:08:16.441Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4714,"outputTokens":19,"totalTokens":4733} 
+[2026-02-09T23:08:16.441Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T23:08:16.442Z] [DEBUG] [KIS] Fetching Daily OHLCV for 092460 (period: 60)... 
+[2026-02-09T23:08:16.442Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=092460&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (timeout: 10000ms) 
+[2026-02-09T23:08:16.681Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=092460&FID_INPUT_DATE_1=20251121&FID_INPUT_DATE_2=20260209&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0 (status: 200) 
+[2026-02-09T23:08:16.791Z] [DEBUG] [KIS] Daily OHLCV fetched. 54 records. 
+[2026-02-09T23:08:16.793Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T23:08:16.793Z] [DEBUG] [Agent] Calling model with prompt length: 1037 
+[2026-02-09T23:08:16.793Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1037 
+[2026-02-09T23:08:19.540Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4857,"outputTokens":224,"totalTokens":5081} 
+[2026-02-09T23:08:19.541Z] [DEBUG] [Agent] Model responded. content length: 392 
+[2026-02-09T23:08:19.541Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T23:08:19.541Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 901 
+[2026-02-09T23:08:23.438Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3471,"outputTokens":156,"totalTokens":3627} 
+[2026-02-09T23:08:23.438Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 356 
+[2026-02-09T23:08:25.287Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":229,"outputTokens":49,"totalTokens":278} 
+[2026-02-09T23:08:51.907Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T23:08:51.908Z] [DEBUG] [Agent] Calling model with prompt length: 298 
+[2026-02-09T23:08:51.908Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 298 
+[2026-02-09T23:08:53.486Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4715,"outputTokens":70,"totalTokens":4785} 
+[2026-02-09T23:08:53.486Z] [DEBUG] [Agent] Model responded. content length: 130 
+[2026-02-09T23:08:53.487Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T23:08:53.487Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 213 
+[2026-02-09T23:08:55.183Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":134,"outputTokens":35,"totalTokens":169} 
+[2026-02-09T23:09:22.791Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T23:09:22.792Z] [DEBUG] [Agent] Calling model with prompt length: 345 
+[2026-02-09T23:09:22.792Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 345 
+[2026-02-09T23:09:24.399Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4748,"outputTokens":26,"totalTokens":4774} 
+[2026-02-09T23:09:24.399Z] [DEBUG] [Agent] Model responded. content length: 0 
+[2026-02-09T23:09:24.400Z] [DEBUG] [KIS] Fetching US Daily OHLCV for CRDO (NAS)... 
+[2026-02-09T23:09:24.400Z] [DEBUG] [Fetch] Starting request to https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=CRDO&GUBN=0&BYMD=20260209&MODP=1 (timeout: 10000ms) 
+[2026-02-09T23:09:24.653Z] [DEBUG] [Fetch] Request completed for https://openapivts.koreainvestment.com:29443/uapi/overseas-price/v1/quotations/dailyprice?AUTH=&EXCD=NAS&SYMB=CRDO&GUBN=0&BYMD=20260209&MODP=1 (status: 200) 
+[2026-02-09T23:09:24.773Z] [DEBUG] [Agent] Iteration 1 start 
+[2026-02-09T23:09:24.773Z] [DEBUG] [Agent] Calling model with prompt length: 1110 
+[2026-02-09T23:09:24.773Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 1110 
+[2026-02-09T23:09:29.825Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4888,"outputTokens":246,"totalTokens":5134} 
+[2026-02-09T23:09:29.825Z] [DEBUG] [Agent] Model responded. content length: 789 
+[2026-02-09T23:09:29.825Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T23:09:29.825Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 974 
+[2026-02-09T23:09:32.158Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":3506,"outputTokens":117,"totalTokens":3623} 
+[2026-02-09T23:09:32.159Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 345 
+[2026-02-09T23:09:33.160Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":194,"outputTokens":51,"totalTokens":245} 
+[2026-02-09T23:10:04.768Z] [DEBUG] [Agent] Iteration 0 start 
+[2026-02-09T23:10:04.768Z] [DEBUG] [Agent] Calling model with prompt length: 327 
+[2026-02-09T23:10:04.769Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 327 
+[2026-02-09T23:10:07.171Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":4737,"outputTokens":30,"totalTokens":4767} 
+[2026-02-09T23:10:07.171Z] [DEBUG] [Agent] Model responded. content length: 143 
+[2026-02-09T23:10:07.171Z] [DEBUG] [Agent] No tool calls detected. Generating final answer. 
+[2026-02-09T23:10:07.172Z] [DEBUG] [LLM] calling model gpt-4o. Prompt length: 219 
+[2026-02-09T23:10:08.883Z] [DEBUG] [LLM] received response. Usage: {"inputTokens":89,"outputTokens":20,"totalTokens":109} 

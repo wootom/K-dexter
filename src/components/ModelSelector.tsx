@@ -18,8 +18,8 @@ const PROVIDERS: Provider[] = [
     displayName: 'OpenAI',
     providerId: 'openai',
     models: [
-      { id: 'gpt-5.2', displayName: 'GPT 5.2' },
-      { id: 'gpt-4.1', displayName: 'GPT 4.1' },
+      { id: 'gpt-4o', displayName: 'GPT-4o' },
+      { id: 'gpt-4o-mini', displayName: 'GPT-4o Mini' },
     ],
   },
   {
@@ -75,7 +75,7 @@ export function getDefaultModelForProvider(providerId: string): string | undefin
 export function getModelDisplayName(modelId: string): string {
   // Handle prefixed model IDs (e.g., "ollama:llama3", "openrouter:anthropic/claude-3.5")
   const normalizedId = modelId.replace(/^(ollama|openrouter):/, '');
-  
+
   // Search through all providers for the model
   for (const provider of PROVIDERS) {
     const model = provider.models.find((m) => m.id === normalizedId || m.id === modelId);
@@ -83,7 +83,7 @@ export function getModelDisplayName(modelId: string): string {
       return model.displayName;
     }
   }
-  
+
   // Fallback: return the model ID as-is (for dynamic models like Ollama or OpenRouter)
   return normalizedId;
 }
@@ -166,9 +166,9 @@ export function ModelInputField({ providerId, currentModel, onSubmit }: ModelInp
   const initialValue = currentModel?.startsWith('openrouter:')
     ? currentModel.replace(/^openrouter:/, '')
     : '';
-  
+
   const [inputValue, setInputValue] = useState(initialValue);
-  
+
   const provider = PROVIDERS.find((p) => p.providerId === providerId);
   const providerName = provider?.displayName ?? providerId;
 

@@ -156,6 +156,8 @@ export function createFinancialSearch(model: string): DynamicStructuredTool {
         })
       );
 
+
+
       // 4. Combine results
       const successfulResults = results.filter((r) => r.error === null);
       const failedResults = results.filter((r) => r.error !== null);
@@ -170,7 +172,35 @@ export function createFinancialSearch(model: string): DynamicStructuredTool {
         // Use tool name as key, or tool_ticker for multiple calls to same tool
         const ticker = (result.args as Record<string, unknown>).ticker as string | undefined;
         const key = ticker ? `${result.tool}_${ticker}` : result.tool;
-        combinedData[key] = result.data;
+
+        // Truncate data if too large (to prevent context overflow)
+        let data = result.data;
+        try {
+          const jsonStr = JSON.stringify(data);
+          if (jsonStr.length > 4000) {
+            if (Array.isArray(data)) {
+              // If array, keep top 5 items
+              const sliced = data.slice(0, 5);
+              if (JSON.stringify(sliced).length <= 4000) {
+                data = sliced;
+              } else {
+                // Even 5 items are too big, try 2
+                const sliced2 = data.slice(0, 2);
+                if (JSON.stringify(sliced2).length <= 4000) {
+                  data = sliced2;
+                } else {
+                  data = JSON.stringify(sliced2).slice(0, 4000) + '...(truncated)';
+                }
+              }
+            } else {
+              data = jsonStr.slice(0, 4000) + '...(truncated)';
+            }
+          }
+        } catch (e) {
+          // Ignore stringify errors
+        }
+
+        combinedData[key] = data;
       }
 
       // Add errors if any

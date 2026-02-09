@@ -48,6 +48,12 @@ export function saveConfig(config: Config): boolean {
  * Called once on config load to ensure backwards compatibility.
  */
 function migrateModelToProvider(config: Config): Config {
+  // Fix legacy or invalid model names
+  if (config.modelId === 'gpt-5.2') {
+    config.modelId = 'gpt-4o';
+    saveConfig(config);
+  }
+
   // If already has provider, no migration needed
   if (config.provider) {
     return config;
@@ -58,7 +64,7 @@ function migrateModelToProvider(config: Config): Config {
     const providerId = MODEL_TO_PROVIDER_MAP[config.model];
     if (providerId) {
       config.provider = providerId;
-      delete config.model;
+      delete config.model; // Remove legacy key
       // Save the migrated config
       saveConfig(config);
     }
@@ -69,23 +75,23 @@ function migrateModelToProvider(config: Config): Config {
 
 export function getSetting<T>(key: string, defaultValue: T): T {
   let config = loadConfig();
-  
+
   // Run migration if accessing provider setting
   if (key === 'provider') {
     config = migrateModelToProvider(config);
   }
-  
+
   return (config[key] as T) ?? defaultValue;
 }
 
 export function setSetting(key: string, value: unknown): boolean {
   const config = loadConfig();
   config[key] = value;
-  
+
   // If setting provider, remove legacy model key
   if (key === 'provider' && config.model) {
     delete config.model;
   }
-  
+
   return saveConfig(config);
 }

@@ -1,6 +1,8 @@
 import { AIMessage } from '@langchain/core/messages';
+import { BaseChatModel } from '@langchain/core/language_models/chat_models';
+import { logDebug } from '../utils/logger.js';
 import { StructuredToolInterface } from '@langchain/core/tools';
-import { callLlm } from '../model/llm.js';
+import { callLlm, DEFAULT_MODEL } from '../model/llm.js';
 import { Scratchpad, type ToolContext } from './scratchpad.js';
 import { getTools } from '../tools/registry.js';
 import { buildSystemPrompt, buildIterationPrompt, buildFinalAnswerPrompt } from '../agent/prompts.js';
@@ -32,7 +34,7 @@ export class Agent {
     tools: StructuredToolInterface[],
     systemPrompt: string
   ) {
-    this.model = config.model ?? 'gpt-5.2';
+    this.model = config.model ?? DEFAULT_MODEL;
     this.modelProvider = config.modelProvider ?? 'openai';
     this.maxIterations = config.maxIterations ?? DEFAULT_MAX_ITERATIONS;
     this.tools = tools;
@@ -45,7 +47,7 @@ export class Agent {
    * Create a new Agent instance with tools.
    */
   static create(config: AgentConfig = {}): Agent {
-    const model = config.model ?? 'gpt-5.2';
+    const model = config.model ?? DEFAULT_MODEL;
     const tools = getTools(model);
     const systemPrompt = buildSystemPrompt(model);
     return new Agent(config, tools, systemPrompt);
@@ -59,7 +61,7 @@ export class Agent {
   async *run(query: string, inMemoryHistory?: InMemoryChatHistory): AsyncGenerator<AgentEvent> {
     const startTime = Date.now();
     const tokenCounter = new TokenCounter();
-    
+
     if (this.tools.length === 0) {
       yield { type: 'done', answer: 'No tools available. Please check your API key configuration.', toolCalls: [], iterations: 0, totalTime: Date.now() - startTime };
       return;
@@ -67,19 +69,29 @@ export class Agent {
 
     // Create scratchpad for this query - single source of truth for all work done
     const scratchpad = new Scratchpad(query);
-    
+
     // Build initial prompt with conversation history context
     let currentPrompt = this.buildInitialPrompt(query, inMemoryHistory);
-    
+
     let iteration = 0;
 
     // Main agent loop
     while (iteration < this.maxIterations) {
+      logDebug(`[Agent] Iteration ${iteration} start`);
+      if (this.signal?.aborted) {
+        logDebug(`[Agent] Aborted during iteration ${iteration}`);
+        yield { type: 'done', answer: 'Agent aborted.', toolCalls: scratchpad.getToolCallRecords(), iterations: iteration, totalTime: Date.now() - startTime };
+        return;
+      }
       iteration++;
 
+      // 1. Call model
+      logDebug(`[Agent] Calling model with prompt length: ${currentPrompt.length}`);
+      yield { type: 'thinking', message: 'Thinking...' };
       const { response, usage } = await this.callModel(currentPrompt);
       tokenCounter.add(usage);
       const responseText = typeof response === 'string' ? response : extractTextContent(response);
+      logDebug(`[Agent] Model responded. content length: ${responseText?.length}`);
 
       // Emit thinking if there are also tool calls (skip whitespace-only responses)
       if (responseText?.trim() && typeof response !== 'string' && hasToolCalls(response)) {
@@ -90,6 +102,7 @@ export class Agent {
 
       // No tool calls = ready to generate final answer
       if (typeof response === 'string' || !hasToolCalls(response)) {
+        logDebug(`[Agent] No tool calls detected. Generating final answer.`);
         // If no tools were called at all, just use the direct response
         // This handles greetings, clarifying questions, etc.
         if (!scratchpad.hasToolResults() && responseText) {
@@ -102,12 +115,12 @@ export class Agent {
         // Generate final answer with full context from scratchpad
         const fullContext = this.buildFullContextForAnswer(query, scratchpad);
         const finalPrompt = buildFinalAnswerPrompt(query, fullContext);
-        
+
         yield { type: 'answer_start' };
         const { response: finalResponse, usage: finalUsage } = await this.callModel(finalPrompt, false);
         tokenCounter.add(finalUsage);
-        const answer = typeof finalResponse === 'string' 
-          ? finalResponse 
+        const answer = typeof finalResponse === 'string'
+          ? finalResponse
           : extractTextContent(finalResponse);
 
         const totalTime = Date.now() - startTime;
@@ -124,10 +137,10 @@ export class Agent {
         yield result.value;
         result = await generator.next();
       }
-      
+
       // Anthropic-style context management: get full tool results
       let fullToolResults = scratchpad.getToolResults();
-      
+
       // Check context threshold and clear oldest tool results if needed
       const estimatedContextTokens = estimateTokens(this.systemPrompt + query + fullToolResults);
       if (estimatedContextTokens > CONTEXT_THRESHOLD) {
@@ -138,10 +151,10 @@ export class Agent {
           fullToolResults = scratchpad.getToolResults();
         }
       }
-      
+
       // Build iteration prompt with full tool results (Anthropic-style)
       currentPrompt = buildIterationPrompt(
-        query, 
+        query,
         fullToolResults,
         scratchpad.formatToolUsageForPrompt()
       );
@@ -150,12 +163,12 @@ export class Agent {
     // Max iterations reached - still generate proper final answer
     const fullContext = this.buildFullContextForAnswer(query, scratchpad);
     const finalPrompt = buildFinalAnswerPrompt(query, fullContext);
-    
+
     yield { type: 'answer_start' };
     const { response: finalResponse, usage: finalUsage } = await this.callModel(finalPrompt, false);
     tokenCounter.add(finalUsage);
-    const answer = typeof finalResponse === 'string' 
-      ? finalResponse 
+    const answer = typeof finalResponse === 'string'
+      ? finalResponse
       : extractTextContent(finalResponse);
 
     const totalTime = Date.now() - startTime;
@@ -231,13 +244,13 @@ export class Agent {
 
     // Check tool limits - yields warning if approaching/over limits
     const limitCheck = scratchpad.canCallTool(toolName, toolQuery);
-    
+
     if (limitCheck.warning) {
-      yield { 
-        type: 'tool_limit', 
-        tool: toolName, 
-        warning: limitCheck.warning, 
-        blocked: false 
+      yield {
+        type: 'tool_limit',
+        tool: toolName,
+        warning: limitCheck.warning,
+        blocked: false
       };
     }
 
@@ -299,13 +312,13 @@ export class Agent {
    */
   private extractQueryFromArgs(args: Record<string, unknown>): string | undefined {
     const queryKeys = ['query', 'search', 'question', 'q', 'text', 'input'];
-    
+
     for (const key of queryKeys) {
       if (typeof args[key] === 'string') {
         return args[key] as string;
       }
     }
-    
+
     return undefined;
   }
 

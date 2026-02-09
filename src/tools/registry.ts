@@ -1,9 +1,23 @@
+
 import { StructuredToolInterface } from '@langchain/core/tools';
 import { createFinancialSearch, createFinancialMetrics, createReadFilings } from './finance/index.js';
 import { exaSearch, tavilySearch } from './search/index.js';
 import { skillTool, SKILL_TOOL_DESCRIPTION } from './skill.js';
 import { browserTool } from './browser/index.js';
 import { FINANCIAL_SEARCH_DESCRIPTION, FINANCIAL_METRICS_DESCRIPTION, WEB_SEARCH_DESCRIPTION, READ_FILINGS_DESCRIPTION, BROWSER_DESCRIPTION } from './descriptions/index.js';
+import {
+  KIS_PRICE_DESCRIPTION,
+  KIS_OHLCV_DESCRIPTION,
+  KIS_TREND_DESCRIPTION,
+  DART_SEARCH_DESCRIPTION,
+  DART_COMPANY_DESCRIPTION,
+  DART_FINANCIALS_DESCRIPTION,
+  TECHNICAL_ANALYSIS_DESCRIPTION
+} from './descriptions/korea.js';
+import { getCurrentPrice, getDailyOHLCV, getInvestorTrend } from './korea/kis-client.js';
+import { searchDisclosures, getCompanyInfo, getFinancialStatements } from './korea/dart-client.js';
+import { analyzeKrTechnical, analyzeUsTechnical } from './korea/technical.js';
+import { getUsCurrentPrice, getUsDailyOHLCV } from './korea/kis-client.js';
 import { discoverSkills } from '../skills/index.js';
 
 /**
@@ -46,6 +60,58 @@ export function getToolRegistry(model: string): RegisteredTool[] {
       name: 'browser',
       tool: browserTool,
       description: BROWSER_DESCRIPTION,
+    },
+    // Korea Market Tools
+    {
+      name: 'get_kr_current_price',
+      tool: getCurrentPrice,
+      description: KIS_PRICE_DESCRIPTION,
+    },
+    {
+      name: 'get_kr_daily_ohlcv',
+      tool: getDailyOHLCV,
+      description: KIS_OHLCV_DESCRIPTION,
+    },
+    {
+      name: 'get_kr_investor_trend',
+      tool: getInvestorTrend,
+      description: KIS_TREND_DESCRIPTION,
+    },
+    {
+      name: 'search_kr_disclosures',
+      tool: searchDisclosures,
+      description: DART_SEARCH_DESCRIPTION,
+    },
+    {
+      name: 'get_kr_company_info',
+      tool: getCompanyInfo,
+      description: DART_COMPANY_DESCRIPTION,
+    },
+    {
+      name: 'get_kr_financial_statements',
+      tool: getFinancialStatements,
+      description: DART_FINANCIALS_DESCRIPTION,
+    },
+    {
+      name: 'analyze_kr_technical',
+      tool: analyzeKrTechnical,
+      description: TECHNICAL_ANALYSIS_DESCRIPTION,
+    },
+    // US Market Tools
+    {
+      name: 'get_us_current_price',
+      tool: getUsCurrentPrice,
+      description: '미국 주식의 현재가 정보를 조회합니다. 티커(예: AAPL)와 거래소(NAS/NYS/AMS)를 입력하세요.',
+    },
+    {
+      name: 'get_us_daily_ohlcv',
+      tool: getUsDailyOHLCV,
+      description: '미국 주식의 일봉(OHLCV) 데이터를 조회합니다. 기술적 분석에 사용됩니다.',
+    },
+    {
+      name: 'analyze_us_technical',
+      tool: analyzeUsTechnical,
+      description: '미국 주식의 기술적 지표(MA, RSI, MACD, BB)를 분석합니다. 티커(예: AAPL)를 입력하세요.',
     },
   ];
 
