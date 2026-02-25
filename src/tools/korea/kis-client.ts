@@ -7,7 +7,7 @@ const KIS_BASE_URL = process.env.KIS_IS_PAPER_TRADING === 'true'
   ? 'https://openapivts.koreainvestment.com:29443'
   : 'https://openapi.koreainvestment.com:9443';
 
-async function fetchWithTimeout(url: string, options: RequestInit, timeout = 10000) {
+async function fetchWithTimeout(url: string, options: RequestInit, timeout = 30000) {
   const controller = new AbortController();
   const id = setTimeout(() => {
     logDebug(`[Fetch] Timeout triggered for ${url}`);
@@ -30,16 +30,28 @@ async function fetchWithTimeout(url: string, options: RequestInit, timeout = 100
   }
 }
 
+import { promises as fs } from 'fs';
+import path from 'path';
+
+// ... (existing helper function)
+
 interface TokenCache {
   accessToken: string;
   expiresAt: number;
 }
 
-let cachedToken: TokenCache | null = null;
+const CACHE_FILE = path.resolve(process.cwd(), '.dexter', 'token-cache.json');
 
 async function getAccessToken(): Promise<string> {
-  if (cachedToken && Date.now() < cachedToken.expiresAt) {
-    return cachedToken.accessToken;
+  // 1. Try to read from file first
+  try {
+    const data = await fs.readFile(CACHE_FILE, 'utf-8');
+    const cached: TokenCache = JSON.parse(data);
+    if (Date.now() < cached.expiresAt) {
+      return cached.accessToken;
+    }
+  } catch (e) {
+    // Ignore file read errors (missing file, invalid json, etc.)
   }
 
   logDebug('Fetching new KIS access token...');
@@ -60,12 +72,21 @@ async function getAccessToken(): Promise<string> {
     }
 
     const data = await response.json();
-    cachedToken = {
+    const tokenCache: TokenCache = {
       accessToken: data.access_token,
       expiresAt: Date.now() + (data.expires_in - 60) * 1000,
     };
+
+    // Save to file
+    try {
+      await fs.mkdir(path.dirname(CACHE_FILE), { recursive: true });
+      await fs.writeFile(CACHE_FILE, JSON.stringify(tokenCache, null, 2));
+    } catch (err) {
+      logDebug(`Failed to save token cache: ${err}`);
+    }
+
     logDebug('Token fetched successfully.');
-    return cachedToken.accessToken;
+    return tokenCache.accessToken;
   } catch (error) {
     logDebug(`Token Error: ${error}`);
     throw new Error(`Token Error: ${error}`);
@@ -104,7 +125,27 @@ export async function fetchCurrentPrice(symbol: string) {
     if (data.rt_cd !== '0') throw new Error(`KIS API Error: ${data.msg1 || JSON.stringify(data)}`);
 
     logDebug(`[KIS] Current price fetched.`);
-    return data.output;
+
+    // Explicitly map useful fields
+    const output = data.output;
+    return {
+      symbol,
+      price: output.stck_prpr,      // 현재가
+      name: output.rprs_mrkt_kor_name, // 종목명 (if available in this API, check docs. Actually FHKST01010100 might not return name directly, usually requires master data. But let's return raw output + mapped fields)
+      change: output.prdy_vrss,     // 전일대비
+      changeRate: output.prdy_ctrt, // 전일대비율
+      volume: output.acml_vol,      // 누적거래량
+
+      // Valuation Metrics
+      per: output.per,              // PER
+      pbr: output.pbr,              // PBR
+      eps: output.eps,              // EPS
+      bps: output.bps,              // BPS
+      marketCap: output.hts_avls,   // 시가총액 (억)
+
+      // Original raw output for fallback
+      raw: output
+    };
   } catch (error) {
     logDebug(`[KIS] Error fetchCurrentPrice: ${error}`);
     throw error;
@@ -112,39 +153,68 @@ export async function fetchCurrentPrice(symbol: string) {
 }
 
 export async function fetchDailyOHLCV(symbol: string, period: number = 60) {
-  logDebug(`[KIS] Fetching Daily OHLCV for ${symbol} (period: ${period})...`);
+  logDebug(`[KIS] Fetching Daily OHLCV for ${symbol} (target period: ${period})...`);
   try {
     const token = await getAccessToken();
-    const endDate = getKSTDateString(0);
-    const startDate = getKSTDateString(-(period + 20));
+    let records: any[] = [];
+    let endDate = getKSTDateString(0);
+    // Request a bit more than needed in the date range to likely cover holidays
+    // But since we loop, the date range in strict API call matters less if we just slide the window
+    // KIS API returns max 100 per call.
 
-    const response = await fetchWithTimeout(
-      `${KIS_BASE_URL}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=${symbol}&FID_INPUT_DATE_1=${startDate}&FID_INPUT_DATE_2=${endDate}&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0`,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-          appkey: process.env.KIS_APP_KEY!,
-          appsecret: process.env.KIS_APP_SECRET!,
-          tr_id: 'FHKST03010100',
+    let loopCount = 0;
+    while (records.length < period && loopCount < 5) {
+      loopCount++;
+      // Sufficient start date buffer
+      const startDate = getKSTDateString(-(period * 2 + 100)); // Just a loose lower bound
+
+      const response = await fetchWithTimeout(
+        `${KIS_BASE_URL}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=${symbol}&FID_INPUT_DATE_1=${startDate}&FID_INPUT_DATE_2=${endDate}&FID_PERIOD_DIV_CODE=D&FID_ORG_ADJ_PRC=0`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            appkey: process.env.KIS_APP_KEY!,
+            appsecret: process.env.KIS_APP_SECRET!,
+            tr_id: 'FHKST03010100',
+          },
         },
+        30000 // Explicit 30s timeout for OHLCV
+      );
+
+      if (!response.ok) throw new Error(`API Error: ${response.status}`);
+      const data = await response.json();
+      if (data.rt_cd !== '0') throw new Error(`KIS API Error: ${data.msg1 || JSON.stringify(data)}`);
+
+      let batch = data.output2 || [];
+      if (batch.length === 0) break;
+
+      // Map fields
+      batch = batch.map((r: any) => ({
+        date: r.stck_bsop_date,
+        close: r.stck_clpr,
+        open: r.stck_oprc,
+        high: r.stck_hgpr,
+        low: r.stck_lwpr,
+        volume: r.acml_vol,
+      }));
+
+      records = [...records, ...batch];
+
+      if (batch.length < 90) {
+        // If less than typical max(100), we probably reached end of history
+        break;
       }
-    );
 
-    if (!response.ok) throw new Error(`API Error: ${response.status}`);
-    const data = await response.json();
-    if (data.rt_cd !== '0') throw new Error(`KIS API Error: ${data.msg1 || JSON.stringify(data)}`);
-
-    let records = data.output2 || [];
-
-    // Trim fields
-    records = records.map((r: any) => ({
-      date: r.stck_bsop_date,
-      close: r.stck_clpr,
-      open: r.stck_oprc,
-      high: r.stck_hgpr,
-      low: r.stck_lwpr,
-      volume: r.acml_vol,
-    }));
+      // Prepare next endDate: 1 day before the last record's date
+      const lastDateStr = batch[batch.length - 1].date; // YYYYMMDD
+      const lastDate = new Date(
+        parseInt(lastDateStr.substring(0, 4)),
+        parseInt(lastDateStr.substring(4, 6)) - 1,
+        parseInt(lastDateStr.substring(6, 8))
+      );
+      lastDate.setDate(lastDate.getDate() - 1);
+      endDate = lastDate.toISOString().slice(0, 10).replace(/-/g, '');
+    }
 
     if (period > 0 && records.length > period) {
       records = records.slice(0, period);

@@ -16,6 +16,8 @@ import {
 } from './descriptions/korea.js';
 import { getCurrentPrice, getDailyOHLCV, getInvestorTrend } from './korea/kis-client.js';
 import { searchDisclosures, getCompanyInfo, getFinancialStatements } from './korea/dart-client.js';
+import { getNaverFinancials } from './korea/kr-daily-financials.js';
+import { analyzeKrStock } from './korea/analysis.js';
 import { analyzeKrTechnical, analyzeUsTechnical } from './korea/technical.js';
 import { getUsCurrentPrice, getUsDailyOHLCV } from './korea/kis-client.js';
 import { discoverSkills } from '../skills/index.js';
@@ -93,9 +95,19 @@ export function getToolRegistry(model: string): RegisteredTool[] {
       description: DART_FINANCIALS_DESCRIPTION,
     },
     {
+      name: 'get_naver_financials',
+      tool: getNaverFinancials,
+      description: '네이버 금융에서 KIS API에 없는 심화 재무지표(ROE, 부채비율, 유보율 등)를 크롤링합니다.',
+    },
+    {
       name: 'analyze_kr_technical',
       tool: analyzeKrTechnical,
       description: TECHNICAL_ANALYSIS_DESCRIPTION,
+    },
+    {
+      name: 'analyze_kr_stock',
+      tool: analyzeKrStock,
+      description: '한국 주식의 종합 분석(기술적 + 재무적)을 수행합니다. 매매 전략과 상세 스코어를 제공합니다.',
     },
     // US Market Tools
     {

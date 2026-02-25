@@ -3,33 +3,36 @@ import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 import { SMA, RSI, MACD, BollingerBands } from 'technicalindicators';
 import { fetchDailyOHLCV, fetchUsDailyOHLCV } from './kis-client.js';
+import { generateTradeSignal, calculateATR, type OhlcvBar, type TradeSignal } from '../../analysis/signal-generator.js';
 
-interface TechnicalScore {
-    score: number; // 0-100
-    signal: 'BUY' | 'SELL' | 'NEUTRAL';
-    details: string[];
-}
+export { TradeSignal };
 
 export const analyzeKrTechnical = tool(
     async ({ symbol, period = 120 }) => {
         try {
-            // 1. Fetch Data internally
             const data = await fetchDailyOHLCV(symbol, period);
 
             if (!data.output2 || !Array.isArray(data.output2) || data.output2.length === 0) {
                 return "No OHLCV data found for the given symbol.";
             }
 
-            const rawRecords = [...data.output2].reverse(); // Now: Oldest -> Newest
+            const rawRecords = [...data.output2].reverse(); // Oldest -> Newest
             const closes = rawRecords.map((r: any) => parseFloat(r.close));
+            const highs = rawRecords.map((r: any) => parseFloat(r.high || r.close));
+            const lows = rawRecords.map((r: any) => parseFloat(r.low || r.close));
 
             if (closes.length < 20) {
                 return "Not enough data for technical analysis (need at least 20 days).";
             }
 
-            const result = calculateTechnicalSignal(symbol, closes);
-            // Add current price from last close if needed, but calculation handles it
-            result.currentPrice = closes[closes.length - 1];
+            const bars: OhlcvBar[] = rawRecords.map((r: any) => ({
+                high: parseFloat(r.high || r.close),
+                low: parseFloat(r.low || r.close),
+                close: parseFloat(r.close),
+            }));
+
+            const currentPrice = closes[closes.length - 1];
+            const result = calculateFullTechnicalAnalysis(symbol, currentPrice, bars, closes);
 
             return JSON.stringify(result, null, 2);
 
@@ -39,10 +42,10 @@ export const analyzeKrTechnical = tool(
     },
     {
         name: 'analyze_kr_technical',
-        description: '한국 주식의 기술적 지표(MA, RSI, MACD, 볼린저밴드)를 분석합니다. 종목코드만 입력하세요.',
+        description: '한국 주식의 기술적 지표(MA, RSI, MACD, 볼린저밴드)와 매매 시그널(진입가/손절가/목표가)을 분석합니다.',
         schema: z.object({
             symbol: z.string().describe('Stock symbol (e.g., 005930)'),
-            period: z.number().optional().default(60).describe('Data period in days (default: 60)'),
+            period: z.number().optional().default(120).describe('Data period in days (default: 120)'),
         }),
     }
 );
@@ -50,15 +53,13 @@ export const analyzeKrTechnical = tool(
 export const analyzeUsTechnical = tool(
     async ({ symbol, exchange = 'NAS', period = 120 }) => {
         try {
-            // 1. Fetch Data
             const data = await fetchUsDailyOHLCV(symbol, exchange, period);
 
             if (!data.output2 || !Array.isArray(data.output2) || data.output2.length === 0) {
                 return "No OHLCV data found for the given symbol.";
             }
 
-            // US Data from fetchUsDailyOHLCV is ALREADY sorted Oldest -> Newest (we did .reverse() there)
-            // So NO need to reverse here.
+            // US Data from fetchUsDailyOHLCV is ALREADY sorted Oldest -> Newest
             const rawRecords = data.output2;
             const closes = rawRecords.map((r: any) => parseFloat(r.close));
 
@@ -66,8 +67,14 @@ export const analyzeUsTechnical = tool(
                 return "Not enough data for technical analysis (need at least 20 days).";
             }
 
-            const result = calculateTechnicalSignal(symbol, closes);
-            result.currentPrice = closes[closes.length - 1];
+            const bars: OhlcvBar[] = rawRecords.map((r: any) => ({
+                high: parseFloat(r.high || r.close),
+                low: parseFloat(r.low || r.close),
+                close: parseFloat(r.close),
+            }));
+
+            const currentPrice = closes[closes.length - 1];
+            const result = calculateFullTechnicalAnalysis(symbol, currentPrice, bars, closes);
 
             return JSON.stringify(result, null, 2);
 
@@ -77,17 +84,43 @@ export const analyzeUsTechnical = tool(
     },
     {
         name: 'analyze_us_technical',
-        description: '미국 주식의 기술적 지표(MA, RSI, MACD, BB)를 분석합니다. 티커(예: AAPL)를 입력하세요.',
+        description: '미국 주식의 기술적 지표(MA, RSI, MACD, BB)와 매매 시그널(진입가/손절가/목표가)을 분석합니다.',
         schema: z.object({
             symbol: z.string().describe('Ticker symbol (e.g., AAPL)'),
             exchange: z.enum(['NAS', 'NYS', 'AMS']).optional().default('NAS'),
-            period: z.number().optional().default(60),
+            period: z.number().optional().default(120),
         }),
     }
 );
 
-function calculateTechnicalSignal(symbol: string, closes: number[]): any {
-    // 2. Calculate Indicators
+/**
+ * 기술적 분석 + 매매 시그널 통합 계산
+ * scorecard와 TradeSignal(진입/손절/목표가)를 모두 반환합니다.
+ */
+export function calculateFullTechnicalAnalysis(
+    symbol: string,
+    currentPrice: number,
+    bars: OhlcvBar[],
+    closes: number[]
+): { scorecard: ReturnType<typeof calculateTechnicalScorecard>; tradeSignal: TradeSignal } {
+    const scorecard = calculateTechnicalScorecard(symbol, currentPrice, closes);
+
+    const tradeSignal = generateTradeSignal(
+        symbol,
+        currentPrice,
+        bars,
+        scorecard.indicators,
+        scorecard.analysis.score,
+        scorecard.analysis.signal
+    );
+
+    return { scorecard, tradeSignal };
+}
+
+/**
+ * 기술적 점수 계산 (기존 로직 유지, 내부 함수로 분리)
+ */
+function calculateTechnicalScorecard(symbol: string, currentPrice: number, closes: number[]) {
     const ma5 = SMA.calculate({ period: 5, values: closes });
     const ma20 = SMA.calculate({ period: 20, values: closes });
     const ma60 = SMA.calculate({ period: 60, values: closes });
@@ -108,8 +141,6 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
         values: closes,
     });
 
-    // Get latest values
-    const currentPrice = closes[closes.length - 1];
     const lastMa5 = ma5[ma5.length - 1];
     const lastMa20 = ma20[ma20.length - 1];
     const lastMa60 = ma60[ma60.length - 1];
@@ -117,7 +148,6 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
     const lastMacd = macd[macd.length - 1];
     const lastBb = bb[bb.length - 1];
 
-    // 3. Scoring Logic
     let score = 50;
     const details: string[] = [];
 
@@ -135,6 +165,7 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
         details.push("MA20 above MA60 (Medium-term Uptrend)");
     } else {
         score -= 5;
+        details.push("MA20 below MA60 (Medium-term Downtrend)");
     }
 
     // RSI
@@ -149,6 +180,7 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
     }
 
     // MACD
+    const macdHistogram = lastMacd?.histogram ?? null;
     if (lastMacd && lastMacd.MACD && lastMacd.signal) {
         if (lastMacd.MACD > lastMacd.signal) {
             score += 10;
@@ -170,7 +202,6 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
         }
     }
 
-    // Normalize score
     score = Math.max(0, Math.min(100, score));
 
     let signal: 'BUY' | 'SELL' | 'NEUTRAL' = 'NEUTRAL';
@@ -179,14 +210,16 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
 
     return {
         symbol,
-        currentPrice, // Will be overwritten by caller if needed
+        currentPrice,
         indicators: {
             ma5: lastMa5,
             ma20: lastMa20,
             ma60: lastMa60,
             rsi: lastRsi,
-            macd: lastMacd,
-            bb: lastBb,
+            bbUpper: lastBb?.upper ?? currentPrice,
+            bbMiddle: lastBb?.middle ?? currentPrice,
+            bbLower: lastBb?.lower ?? currentPrice,
+            macdHistogram,
         },
         analysis: {
             score,
@@ -195,5 +228,3 @@ function calculateTechnicalSignal(symbol: string, closes: number[]): any {
         },
     };
 }
-
-
