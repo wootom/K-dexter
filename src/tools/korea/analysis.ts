@@ -27,11 +27,12 @@ export const analyzeKrStock = tool(
                 return `Not enough data for analysis (requires 120+ days). Available: ${closes.length}`;
             }
 
-            // Build OHLCV bars for ATR/signal calculation
-            const bars: OhlcvBar[] = rawRecords.map((d: any) => ({
+            // Build OHLCV bars for ATR/signal/volume-profile calculation
+            const bars = rawRecords.map((d: any) => ({
                 high: parseFloat(d.high || d.close),
                 low: parseFloat(d.low || d.close),
                 close: parseFloat(d.close),
+                volume: parseFloat(d.volume || '0'), // 매물대 계산에 필수
             }));
 
             // 3. Calculate Technical Indicators
@@ -124,9 +125,9 @@ export const analyzeKrStock = tool(
                 fundamentals: {
                     per: combinedFundamentals.per,
                     pbr: combinedFundamentals.pbr,
-                    eps: combinedFundamentals.eps,           // EPS (원)
-                    bps: combinedFundamentals.bps,           // BPS (원)
-                    marketCap: combinedFundamentals.marketCap, // 시가총액 (억원)
+                    eps: combinedFundamentals.eps,
+                    bps: combinedFundamentals.bps,
+                    marketCap: combinedFundamentals.marketCap,
                     roe: combinedFundamentals.roe,
                     debt_ratio: combinedFundamentals.debt_ratio,
                     op_margin: combinedFundamentals.op_margin,
@@ -141,7 +142,9 @@ export const analyzeKrStock = tool(
                 scorer: scorerResult,
                 trade_signal: {
                     signal: tradeSignal.signal,
+                    swing_grade: tradeSignal.swingGrade,          // 2주 스윙 적합도
                     levels: tradeSignal.levels,
+                    volume_profile: tradeSignal.volumeProfile,    // 매물대 분석
                     rationale: tradeSignal.rationale,
                 },
             }, null, 2);
