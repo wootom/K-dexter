@@ -7,8 +7,8 @@
 
 ## 🌐 API 엔드포인트 (외부 접근용)
 
-> **Base URL**: `https://macmini.tail884f5f.ts.net`  
-> Tailscale Funnel을 통해 Mac Mini에서 24시간 서비스 중
+> **Base URL**: `https://macmini.*******.ts.net`  
+> Tailscale Funnel을 통해 ***** 24시간 서비스 중
 
 ### `POST /k-dexter/analyze/kr` — 한국 주식 종합 분석 ⭐
 
