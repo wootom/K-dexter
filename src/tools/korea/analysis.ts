@@ -11,6 +11,17 @@ import { AnalysisRequest } from '../../analysis/types.js';
 export const analyzeKrStock = tool(
     async ({ symbol }) => {
         try {
+            // 한국 종목코드 형식 검증 (6자리 숫자)
+            if (!/^\d{6}$/.test(symbol)) {
+                return JSON.stringify({
+                    error: `Invalid Korean stock symbol: "${symbol}". Must be a 6-digit number (e.g., "005930" for Samsung).`,
+                    hint: 'US stocks and other non-Korean symbols are not supported by this endpoint.'
+                });
+            }
+
+            // VTS(모의투자) 환경 경고
+            const isVtsMode = process.env.KIS_IS_PAPER_TRADING === 'true';
+
             // 1. Fetch Data in Parallel
             const [priceData, ohlcvData, fundamentalData] = await Promise.all([
                 fetchCurrentPrice(symbol),
@@ -122,6 +133,12 @@ export const analyzeKrStock = tool(
             // 7. Return Unified Result
             return JSON.stringify({
                 symbol,
+                // VTS 모드 경고 (KIS_IS_PAPER_TRADING=true 시 가격/시총 부정확)
+                data_quality: isVtsMode ? {
+                    warning: 'VTS_PAPER_TRADING',
+                    message: 'KIS_IS_PAPER_TRADING=true. 현재가·시총은 모의투자 가상 가격 기반이며 실제 시장가와 다를 수 있습니다.',
+                    action: '.env에서 KIS_IS_PAPER_TRADING=false 로 변경 시 실시간 데이터 사용 가능'
+                } : undefined,
                 fundamentals: {
                     per: combinedFundamentals.per,
                     pbr: combinedFundamentals.pbr,

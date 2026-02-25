@@ -34,11 +34,13 @@ export async function fetchNaverFinancials(symbol: string) {
         const html = decodeEucKr(buffer);
 
         // 1. 기업실적분석 테이블 추출 (class="section cop_analysis")
-        const analysisSectionMatch = html.match(/<div class="section cop_analysis">([\s\S]*?)<\/div>/);
-        if (!analysisSectionMatch) {
+        // NOTE: lazy regex [\s\S]*?</div> 는 첫 </div>에서 멈춰 전체 섹션을 못 읽음
+        // → 섹션 시작 위치를 찾고 충분한 길이(40,000자)를 슬라이스하여 사용
+        const sectionStart = html.indexOf('class="section cop_analysis"');
+        if (sectionStart < 0) {
             return { error: "Financial analysis section not found" };
         }
-        const sectionHtml = analysisSectionMatch[1];
+        const sectionHtml = html.substring(sectionStart, sectionStart + 40000);
 
         // 2. 주요 지표 추출 함수
         const extractMetric = (metricName: string): number | null => {
@@ -83,16 +85,15 @@ export async function fetchNaverFinancials(symbol: string) {
 
         return {
             symbol,
+            // cop_analysis 섹션에서 추출 가능한 지표 (정적 HTML 기반)
             roe: extractMetric('ROE'),
-            per: extractMetric('PER'), // KIS에도 있지만 교차 검증용
+            per: extractMetric('PER'),  // KIS와 교차검증용
             pbr: extractMetric('PBR'),
-            operatingProfitMargin: extractMetric('영업이익률'),
-            netProfitMargin: extractMetric('순이익률'),
-            debtRatio: extractMetric('부채비율'),
-            quickRatio: extractMetric('당좌비율'),
-            reserveRatio: extractMetric('유보율'),
-            dividendYield: extractMetric('시가배당률'), // 배당수익률
-            source: 'Naver Finance'
+            dividendYield: extractMetric('배당수익률') ?? extractMetric('시가배당률'),
+            // 아래 지표는 Naver가 JS로 동적 로딩하여 정적 크롤링 불가
+            // debtRatio, operatingProfitMargin, netProfitMargin → null 고정
+            source: 'Naver Finance (cop_analysis)',
+            data_limitations: '부채비율·영업이익률·순이익률은 JS 동적 로딩으로 제공 불가'
         };
 
     } catch (error) {
