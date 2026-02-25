@@ -55,6 +55,9 @@ export const analyzeKrStock = tool(
             const combinedFundamentals = {
                 per: (fundamentalData as any).per || parseFloat(priceData.per),
                 pbr: (fundamentalData as any).pbr || parseFloat(priceData.pbr),
+                eps: parseFloat(priceData.eps) || undefined,          // EPS (원)
+                bps: parseFloat(priceData.bps) || undefined,          // BPS (원)
+                marketCap: parseInt(priceData.marketCap) || undefined, // 시가총액 (억원)
                 roe: (fundamentalData as any).roe,
                 debt_ratio: (fundamentalData as any).debtRatio,
                 op_margin: (fundamentalData as any).operatingProfitMargin
@@ -118,7 +121,16 @@ export const analyzeKrStock = tool(
             // 7. Return Unified Result
             return JSON.stringify({
                 symbol,
-                fundamentals: combinedFundamentals,
+                fundamentals: {
+                    per: combinedFundamentals.per,
+                    pbr: combinedFundamentals.pbr,
+                    eps: combinedFundamentals.eps,           // EPS (원)
+                    bps: combinedFundamentals.bps,           // BPS (원)
+                    marketCap: combinedFundamentals.marketCap, // 시가총액 (억원)
+                    roe: combinedFundamentals.roe,
+                    debt_ratio: combinedFundamentals.debt_ratio,
+                    op_margin: combinedFundamentals.op_margin,
+                },
                 technicals: {
                     ma20: lastMa20,
                     ma60: lastMa60,
