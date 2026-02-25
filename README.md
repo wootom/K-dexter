@@ -50,14 +50,14 @@
 
 **curl 예시**
 ```bash
-curl -X POST https://macmini.tail884f5f.ts.net/k-dexter/analyze/kr \
+curl -X POST https://macmini.******.ts.net/k-dexter/analyze/kr \
   -H "Content-Type: application/json" \
   -d '{"symbol": "005930"}'
 ```
 
 ### `GET /health`
 ```bash
-curl https://macmini.tail884f5f.ts.net/health  # → OK
+curl https://macmini.******.ts.net/health  # → OK
 ```
 
 ### `POST /k-dexter/analyze` — 수동 입력 분석 (기존)
@@ -68,7 +68,7 @@ curl https://macmini.tail884f5f.ts.net/health  # → OK
 ## 📊 Google Sheets Apps Script 연동
 
 ```javascript
-const K_DEXTER_URL = 'https://macmini.tail884f5f.ts.net';
+const K_DEXTER_URL = 'https://macmini.******.ts.net';
 
 // 셀 함수: =ANALYZE_KR("005930")
 function ANALYZE_KR(symbol) {
