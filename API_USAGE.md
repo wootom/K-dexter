@@ -13,7 +13,7 @@ pm2 start "bun run src/server.ts" --name k-dexter-api --cwd /path/to/K-dexter
 ```
 
 - **로컬**: `http://localhost:3000`
-- **외부 (Tailscale Funnel)**: `https://macmini.tail884f5f.ts.net`
+- **외부 (Tailscale Funnel)**: `https://macmini.******.ts.net`
 
 ---
 
@@ -184,5 +184,5 @@ curl -X POST http://localhost:3000/k-dexter/analyze \
 ## 6. Health Check
 
 ```bash
-curl https://macmini.tail884f5f.ts.net/health  # → OK
+curl https://macmini.****.ts.net/health  # → OK
 ```
