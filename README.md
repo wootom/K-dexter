@@ -5,10 +5,10 @@
 
 ---
 
-## 🌐 API 엔드포인트 (외부 접근용)
+## 🌐 API 엔드포인트
 
-> **Base URL**: `https://macmini.*******.ts.net`  
-> Tailscale Funnel을 통해 ***** 24시간 서비스 중
+> **Base URL**: `http://localhost:3000` (로컬 실행 기준)  
+> 외부 접근 방법은 별도 문의하세요.
 
 ### `POST /k-dexter/analyze/kr` — 한국 주식 종합 분석 ⭐
 
@@ -50,14 +50,14 @@
 
 **curl 예시**
 ```bash
-curl -X POST https://macmini.******.ts.net/k-dexter/analyze/kr \
+curl -X POST http://localhost:3000/k-dexter/analyze/kr \
   -H "Content-Type: application/json" \
   -d '{"symbol": "005930"}'
 ```
 
 ### `GET /health`
 ```bash
-curl https://macmini.******.ts.net/health  # → OK
+curl http://localhost:3000/health  # → OK
 ```
 
 ### `POST /k-dexter/analyze` — 수동 입력 분석 (기존)
@@ -68,7 +68,7 @@ curl https://macmini.******.ts.net/health  # → OK
 ## 📊 Google Sheets Apps Script 연동
 
 ```javascript
-const K_DEXTER_URL = 'https://macmini.******.ts.net';
+const K_DEXTER_URL = 'http://localhost:3000';
 
 // 셀 함수: =ANALYZE_KR("005930")
 function ANALYZE_KR(symbol) {
