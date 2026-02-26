@@ -85,15 +85,16 @@ export async function fetchNaverFinancials(symbol: string) {
 
         return {
             symbol,
-            // cop_analysis 섹션에서 추출 가능한 지표 (정적 HTML 기반)
             roe: extractMetric('ROE'),
-            per: extractMetric('PER'),  // KIS와 교차검증용
+            per: extractMetric('PER'), // KIS에도 있지만 교차 검증용
             pbr: extractMetric('PBR'),
-            dividendYield: extractMetric('배당수익률') ?? extractMetric('시가배당률'),
-            // 아래 지표는 Naver가 JS로 동적 로딩하여 정적 크롤링 불가
-            // debtRatio, operatingProfitMargin, netProfitMargin → null 고정
-            source: 'Naver Finance (cop_analysis)',
-            data_limitations: '부채비율·영업이익률·순이익률은 JS 동적 로딩으로 제공 불가'
+            operatingProfitMargin: extractMetric('영업이익률'),
+            netProfitMargin: extractMetric('순이익률'),
+            debtRatio: extractMetric('부채비율'),
+            quickRatio: extractMetric('당좌비율'),
+            reserveRatio: extractMetric('유보율'),
+            dividendYield: extractMetric('시가배당률'), // 배당수익률
+            source: 'Naver Finance'
         };
 
     } catch (error) {
