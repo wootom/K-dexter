@@ -7,6 +7,7 @@ import { mcpRoutes } from './mcp-gateway/api/mcp.js';
 import { type AnalysisRequest, AnalysisRequestSchema } from './analysis/types.js';
 import { analyze } from './analysis/scorer.js';
 import { analyzeKrStock } from './tools/korea/analysis.js';
+import { analyzeUsStock } from './tools/us/analysis.js';
 
 const PORT = parseInt(process.env.PORT || '3000');
 
@@ -93,7 +94,35 @@ app.post('/k-dexter/analyze/kr', async (c) => {
     }
 });
 
-// 6. Export for Bun
+// 7. NEW: US Stock Full Analysis Endpoint
+app.post('/k-dexter/analyze/us', async (c) => {
+    try {
+        const body = await c.req.json();
+        const { symbol, exchange = 'NAS' } = body;
+
+        if (!symbol || typeof symbol !== 'string') {
+            return c.json({ error: 'Invalid Request', details: '"symbol" is required (e.g., "NVDA")' }, 400);
+        }
+        if (!['NAS', 'NYS', 'AMS'].includes(exchange)) {
+            return c.json({ error: 'Invalid exchange', details: 'Must be NAS, NYS, or AMS' }, 400);
+        }
+
+        const start = performance.now();
+        const rawResult = await analyzeUsStock.invoke({ symbol, exchange });
+        const end = performance.now();
+
+        console.log(`[Auto-Analyzed US] ${symbol} (${exchange}) in ${(end - start).toFixed(2)}ms`);
+
+        const result = JSON.parse(rawResult as string);
+        return c.json(result);
+
+    } catch (e: any) {
+        console.error('Server Error:', e);
+        return c.json({ error: 'Internal Server Error', details: e.message }, 500);
+    }
+});
+
+// 8. Export for Bun
 export default {
     port: PORT,
     fetch: app.fetch,
