@@ -3,7 +3,7 @@ import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 import { SMA, RSI, MACD, BollingerBands } from 'technicalindicators';
 import { fetchDailyOHLCV, fetchUsDailyOHLCV } from './kis-client.js';
-import { generateTradeSignal, calculateATR, type OhlcvBar, type TradeSignal } from '../../analysis/signal-generator.js';
+import { generateTradeSignal, calculateATR, calculateMFI, type OhlcvBar, type TradeSignal } from '../../analysis/signal-generator.js';
 
 export { TradeSignal };
 
@@ -103,7 +103,7 @@ export function calculateFullTechnicalAnalysis(
     bars: OhlcvBar[],
     closes: number[]
 ): { scorecard: ReturnType<typeof calculateTechnicalScorecard>; tradeSignal: TradeSignal } {
-    const scorecard = calculateTechnicalScorecard(symbol, currentPrice, closes);
+    const scorecard = calculateTechnicalScorecard(symbol, currentPrice, closes, bars);
 
     const tradeSignal = generateTradeSignal(
         symbol,
@@ -120,11 +120,22 @@ export function calculateFullTechnicalAnalysis(
 /**
  * 기술적 점수 계산 (기존 로직 유지, 내부 함수로 분리)
  */
-function calculateTechnicalScorecard(symbol: string, currentPrice: number, closes: number[]) {
+function calculateTechnicalScorecard(symbol: string, currentPrice: number, closes: number[], bars: OhlcvBar[]) {
     const ma5 = SMA.calculate({ period: 5, values: closes });
     const ma20 = SMA.calculate({ period: 20, values: closes });
     const ma60 = SMA.calculate({ period: 60, values: closes });
     const rsi = RSI.calculate({ period: 14, values: closes });
+
+    // Calculate MFI manually
+    let mfiLast = 50;
+    try {
+        const mfiArray = calculateMFI(bars, 14);
+        if (mfiArray.length > 0) {
+            mfiLast = mfiArray[mfiArray.length - 1];
+        }
+    } catch (e) {
+        // Fallback
+    }
 
     const macd = MACD.calculate({
         values: closes,
@@ -179,6 +190,17 @@ function calculateTechnicalScorecard(symbol: string, currentPrice: number, close
         details.push(`RSI Neutral (${lastRsi.toFixed(2)})`);
     }
 
+    // MFI
+    if (mfiLast < 20) {
+        score += 10;
+        details.push(`MFI Oversold (${mfiLast.toFixed(2)}) - Potential Buy`);
+    } else if (mfiLast > 80) {
+        score -= 10;
+        details.push(`MFI Overbought (${mfiLast.toFixed(2)}) - Potential Sell`);
+    } else {
+        details.push(`MFI Neutral (${mfiLast.toFixed(2)})`);
+    }
+
     // MACD
     const macdHistogram = lastMacd?.histogram ?? null;
     if (lastMacd && lastMacd.MACD && lastMacd.signal) {
@@ -216,6 +238,7 @@ function calculateTechnicalScorecard(symbol: string, currentPrice: number, close
             ma20: lastMa20,
             ma60: lastMa60,
             rsi: lastRsi,
+            mfi: mfiLast,
             bbUpper: lastBb?.upper ?? currentPrice,
             bbMiddle: lastBb?.middle ?? currentPrice,
             bbLower: lastBb?.lower ?? currentPrice,

@@ -7,6 +7,33 @@
 
 import { calculateVolumeProfile, interpretVolumeProfile, type OhlcvBarWithVolume, type VolumeProfile } from './volume-profile.js';
 
+/** calcSwingGrade 가중치 오버라이드 */
+export interface SwingGradeWeights {
+    technicalScoreMax: number;  // default: 3
+    rrScoreMax: number;         // default: 2
+    volumeProfileMax: number;   // default: 2
+    ma60Max: number;            // default: 1
+}
+
+/** Grade 임계값 오버라이드 */
+export interface SwingGradeThresholds {
+    A: number;  // default: 7
+    B: number;  // default: 5
+    C: number;  // default: 3
+}
+
+/** calcSwingGrade 반환 타입 */
+export interface SwingGradeResult {
+    grade: 'A' | 'B' | 'C' | 'D';
+    score: number;
+    breakdown: {
+        technicalScore: number;
+        rrScore: number;
+        volumeProfileScore: number;
+        ma60Score: number;
+    };
+}
+
 export interface OhlcvBar {
     high: number;
     low: number;
@@ -59,6 +86,7 @@ export interface TradeSignal {
         ma20: number;
         ma60: number;
         rsi: number;
+        mfi: number;
         bbUpper: number;
         bbMiddle: number;
         bbLower: number;
@@ -114,42 +142,109 @@ export function findRecentHighLow(
 }
 
 /**
+ * MFI(Money Flow Index) 계산 (기간별 전형적 가격과 거래량 기반 자금 흐름)
+ */
+export function calculateMFI(bars: OhlcvBar[], period: number = 14): number[] {
+    const mfiValues: number[] = [];
+    if (bars.length < period + 1) return mfiValues;
+
+    const typicalPrices = bars.map(b => (b.high + b.low + b.close) / 3);
+    const rawMoneyFlow = typicalPrices.map((tp, i) => tp * (bars[i].volume || 0));
+
+    // Calculate MFI for each window
+    for (let i = period; i < bars.length; i++) {
+        let positiveMF = 0;
+        let negativeMF = 0;
+        for (let j = i - period + 1; j <= i; j++) {
+            if (typicalPrices[j] > typicalPrices[j - 1]) {
+                positiveMF += rawMoneyFlow[j];
+            } else if (typicalPrices[j] < typicalPrices[j - 1]) {
+                negativeMF += rawMoneyFlow[j];
+            }
+        }
+
+        if (negativeMF === 0) {
+            mfiValues.push(100);
+        } else {
+            const mfr = positiveMF / negativeMF;
+            mfiValues.push(100 - (100 / (1 + mfr)));
+        }
+    }
+
+    return mfiValues;
+}
+
+/**
  * 2주 스윙 적합도 등급 산출
  * A: 조건 최적 / B: 양호 / C: 보통 / D: 부적합
+ *
+ * @param weights  가중치 오버라이드 (백테스트 Parameter Sweep용)
+ * @param thresholds  Grade 임계값 오버라이드
  */
-function calcSwingGrade(
+export function calcSwingGrade(
     score: number,
     rr: number,
     vp: VolumeProfile | null,
     currentPrice: number,
-    ma60: number
-): 'A' | 'B' | 'C' | 'D' {
-    let points = 0;
+    ma60: number,
+    weights?: SwingGradeWeights,
+    thresholds?: SwingGradeThresholds
+): SwingGradeResult {
+    const w = {
+        technicalScoreMax: weights?.technicalScoreMax ?? 3,
+        rrScoreMax: weights?.rrScoreMax ?? 2,
+        volumeProfileMax: weights?.volumeProfileMax ?? 2,
+        ma60Max: weights?.ma60Max ?? 1,
+    };
+    const t = {
+        A: thresholds?.A ?? 7,
+        B: thresholds?.B ?? 5,
+        C: thresholds?.C ?? 3,
+    };
 
-    // 스코어 (최대 3점)
-    if (score >= 70) points += 3;
-    else if (score >= 55) points += 2;
-    else if (score >= 45) points += 1;
-
-    // R/R 비율 (최대 2점)
-    if (rr >= 3.0) points += 2;
-    else if (rr >= 2.0) points += 1;
-
-    // 매물대 위치 (최대 2점)
-    if (vp) {
-        if (vp.pricePosition === 'above_poc') points += 2;       // POC 위 = 강세
-        else if (vp.pricePosition === 'at_poc') points += 1;     // POC 근처 = 중립
-        // below_poc = 0점
+    // 스코어 기여 (max: technicalScoreMax)
+    let techPts = 0;
+    if (w.technicalScoreMax > 0) {
+        if (score >= 70) techPts = w.technicalScoreMax;
+        else if (score >= 55) techPts = Math.round(w.technicalScoreMax * 2 / 3);
+        else if (score >= 45) techPts = Math.round(w.technicalScoreMax * 1 / 3);
     }
 
-    // MA60 위 여부 (최대 1점)
-    if (currentPrice > ma60) points += 1;
+    // R/R 비율 기여 (max: rrScoreMax)
+    let rrPts = 0;
+    if (w.rrScoreMax > 0) {
+        if (rr >= 3.0) rrPts = w.rrScoreMax;
+        else if (rr >= 2.0) rrPts = Math.round(w.rrScoreMax / 2);
+    }
 
-    // 8점 만점
-    if (points >= 7) return 'A';
-    if (points >= 5) return 'B';
-    if (points >= 3) return 'C';
-    return 'D';
+    // 매물대 위치 기여 (max: volumeProfileMax)
+    let vpPts = 0;
+    if (vp && w.volumeProfileMax > 0) {
+        if (vp.pricePosition === 'above_poc') vpPts = w.volumeProfileMax;
+        else if (vp.pricePosition === 'at_poc') vpPts = Math.round(w.volumeProfileMax / 2);
+    }
+
+    // MA60 위 여부 (max: ma60Max)
+    const ma60Pts = (currentPrice > ma60) ? w.ma60Max : 0;
+
+    const total = techPts + rrPts + vpPts + ma60Pts;
+
+    let grade: 'A' | 'B' | 'C' | 'D';
+    if (total >= t.A) grade = 'A';
+    else if (total >= t.B) grade = 'B';
+    else if (total >= t.C) grade = 'C';
+    else grade = 'D';
+
+    return {
+        grade,
+        score: total,
+        breakdown: {
+            technicalScore: techPts,
+            rrScore: rrPts,
+            volumeProfileScore: vpPts,
+            ma60Score: ma60Pts,
+        },
+    };
 }
 
 /**
@@ -160,7 +255,7 @@ export function generateTradeSignal(
     currentPrice: number,
     bars: OhlcvBar[],
     indicators: {
-        ma20: number; ma60: number; rsi: number;
+        ma20: number; ma60: number; rsi: number; mfi: number;
         bbUpper: number; bbMiddle: number; bbLower: number;
         macdHistogram: number | null;
     },
@@ -244,7 +339,7 @@ export function generateTradeSignal(
     const estimatedReturnPct = parseFloat(((target1 - aggressiveEntry) / aggressiveEntry * 100).toFixed(2));
 
     // ── 2주 스윙 적합도 등급 ──────────────────────────────────────────
-    const swingGrade = calcSwingGrade(technicalScore, riskRewardRatio, vp, currentPrice, indicators.ma60);
+    const { grade: swingGrade } = calcSwingGrade(technicalScore, riskRewardRatio, vp, currentPrice, indicators.ma60);
 
     // ── 분석 근거 ─────────────────────────────────────────────────────
     const rationale: string[] = [];

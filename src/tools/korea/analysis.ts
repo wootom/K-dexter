@@ -2,20 +2,21 @@
 import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 import { SMA, RSI } from 'technicalindicators';
-import { fetchCurrentPrice, fetchDailyOHLCV } from './kis-client.js';
+import { fetchCurrentPrice, fetchDailyOHLCV, fetchInvestorTrend } from './kis-client.js';
 import { fetchNaverFinancials } from './kr-daily-financials.js';
 import { analyze } from '../../analysis/scorer.js';
-import { calculateATR, generateTradeSignal, type OhlcvBar } from '../../analysis/signal-generator.js';
+import { calculateATR, calculateMFI, generateTradeSignal, type OhlcvBar } from '../../analysis/signal-generator.js';
 import { AnalysisRequest } from '../../analysis/types.js';
 
 export const analyzeKrStock = tool(
     async ({ symbol }) => {
         try {
             // 1. Fetch Data in Parallel
-            const [priceData, ohlcvData, fundamentalData] = await Promise.all([
+            const [priceData, ohlcvData, fundamentalData, investorTrend] = await Promise.all([
                 fetchCurrentPrice(symbol),
                 fetchDailyOHLCV(symbol, 200), // Need at least 120 trading days
-                fetchNaverFinancials(symbol)
+                fetchNaverFinancials(symbol),
+                fetchInvestorTrend(symbol).catch(() => []) // Catch error safely
             ]);
 
             // 2. Process OHLCV Data (Oldest -> Newest)
@@ -51,6 +52,20 @@ export const analyzeKrStock = tool(
             const lastMa120 = ma120[ma120.length - 1];
             const lastRsi = rsi[rsi.length - 1];
             const currentPrice = parseFloat(priceData.price);
+
+            const mfiArray = calculateMFI(bars, 14);
+            const lastMfi = mfiArray.length > 0 ? mfiArray[mfiArray.length - 1] : 50;
+
+            const latestVolume = bars[bars.length - 1]?.volume || 1;
+            let investor_trend_ratios = null;
+            if (investorTrend && investorTrend.length > 0) {
+                const latestTrend = investorTrend[0];
+                investor_trend_ratios = {
+                    individual: parseFloat(((parseFloat(latestTrend.personal) / latestVolume) * 100).toFixed(2)),
+                    foreigner: parseFloat(((parseFloat(latestTrend.foreigner) / latestVolume) * 100).toFixed(2)),
+                    institution: parseFloat(((parseFloat(latestTrend.institution) / latestVolume) * 100).toFixed(2))
+                };
+            }
 
             // 4. Prepare Fundamental Data
             const combinedFundamentals = {
@@ -110,6 +125,7 @@ export const analyzeKrStock = tool(
                     ma20: lastMa20,
                     ma60: lastMa60,
                     rsi: lastRsi,
+                    mfi: lastMfi,
                     bbUpper,
                     bbMiddle: lastMa20,
                     bbLower,
@@ -137,8 +153,10 @@ export const analyzeKrStock = tool(
                     ma60: lastMa60,
                     ma120: lastMa120,
                     rsi: lastRsi,
+                    mfi: lastMfi,
                     atr,
                 },
+                investor_trend_ratios,
                 scorer: scorerResult,
                 trade_signal: {
                     signal: tradeSignal.signal,
