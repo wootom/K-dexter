@@ -7,6 +7,7 @@ import { fetchNaverFinancials } from './kr-daily-financials.js';
 import { analyze } from '../../analysis/scorer.js';
 import { calculateATR, calculateMFI, generateTradeSignal, type OhlcvBar } from '../../analysis/signal-generator.js';
 import { AnalysisRequest } from '../../analysis/types.js';
+import { calculateSRIM } from '../../analysis/valuation.js';
 
 export const analyzeKrStock = tool(
     async ({ symbol }) => {
@@ -106,6 +107,14 @@ export const analyzeKrStock = tool(
 
             const scorerResult = analyze(request);
 
+            // 5-a. S-RIM 적정주가 계산
+            const srimResult = calculateSRIM({
+                bps: combinedFundamentals.bps,
+                eps: combinedFundamentals.eps,
+                roe: combinedFundamentals.roe,
+                currentPrice,
+            });
+
             // 6. Generate Trade Signal (Entry/Target/Stop-Loss levels)
             const technicalSignal: 'BUY' | 'SELL' | 'NEUTRAL' =
                 scorerResult.scores.total >= 6 ? 'BUY'
@@ -164,6 +173,9 @@ export const analyzeKrStock = tool(
                     levels: tradeSignal.levels,
                     volume_profile: tradeSignal.volumeProfile,    // 매물대 분석
                     rationale: tradeSignal.rationale,
+                },
+                valuation: {
+                    srim: srimResult,
                 },
             }, null, 2);
 

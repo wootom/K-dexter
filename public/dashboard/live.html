@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Dexter 실시간 성과 추적</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <span class="brand">K-Dexter</span>
+        <a href="index.html">백테스트 설정</a>
+        <a href="results.html">결과</a>
+        <a href="live.html" class="active">실시간 추적</a>
+        <a href="manual.html">매뉴얼</a>
+    </nav>
+
+    <div class="container">
+        <div class="card mt-2">
+            <div class="section-title">실시간 성과 추적</div>
+            <div class="alert alert-info">
+                <strong>Coming Soon</strong><br>
+                실시간 성과 추적 기능은 Plan 문서의 Phase 1~2 (GradeSnapshot + DailyPriceRecord) 구현 후 활성화됩니다.<br>
+                현재는 <a href="index.html" style="color:#93c5fd">백테스트</a>를 통해 과거 성과를 즉시 확인할 수 있습니다.
+            </div>
+            <ul style="padding-left:1.2rem;font-size:.85rem;color:#94a3b8;line-height:2;margin-top:.5rem">
+                <li>Phase 1: GradeSnapshot 저장 (새벽 배치)</li>
+                <li>Phase 2: DailyPriceRecord 일별 추적 API</li>
+                <li>Phase 4: PerformanceResult 자동 계산</li>
+                <li>Phase 5: 본 페이지 UI 구현</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

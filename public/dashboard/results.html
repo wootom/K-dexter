@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Dexter 백테스트 결과</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <span class="brand">K-Dexter</span>
+        <a href="index.html">백테스트 설정</a>
+        <a href="results.html" class="active">결과</a>
+        <a href="live.html">실시간 추적</a>
+        <a href="manual.html">매뉴얼</a>
+    </nav>
+
+    <div class="container">
+
+        <div id="loading" class="mt-2 text-muted">결과 불러오는 중...</div>
+        <div id="error-msg" class="alert alert-error hidden"></div>
+        <div id="content" class="hidden">
+
+            <!-- Summary Cards -->
+            <div class="grid-4 mt-2">
+                <div class="card">
+                    <div class="card-title">총 거래</div>
+                    <div class="card-value" id="s-total">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">승률</div>
+                    <div class="card-value" id="s-winrate">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">평균 수익률</div>
+                    <div class="card-value" id="s-avgret">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">최대 낙폭(MDD)</div>
+                    <div class="card-value text-red" id="s-mdd">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Sharpe Ratio</div>
+                    <div class="card-value" id="s-sharpe">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">목표가 도달률</div>
+                    <div class="card-value" id="s-target">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">손절 도달률</div>
+                    <div class="card-value" id="s-stoploss">-</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Profit Factor</div>
+                    <div class="card-value" id="s-pf">-</div>
+                </div>
+            </div>
+
+            <!-- Equity Curve -->
+            <div class="card mt-2">
+                <div class="section-title">Equity Curve (누적 수익률)</div>
+                <div class="chart-container">
+                    <canvas id="chart-equity"></canvas>
+                </div>
+            </div>
+
+            <!-- Grade Breakdown + Factor Correlation -->
+            <div class="grid-2 mt-2" style="gap:1rem">
+                <div class="card">
+                    <div class="section-title">Grade별 성과</div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Grade</th>
+                                    <th>거래수</th>
+                                    <th>승률</th>
+                                    <th>평균수익</th>
+                                    <th>목표도달</th>
+                                </tr>
+                            </thead>
+                            <tbody id="grade-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="chart-container mt-2" style="height:160px">
+                        <canvas id="chart-grade"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="section-title">Factor 기여도 (상관계수)</div>
+                    <div id="factor-bars" style="margin-top:.5rem"></div>
+                </div>
+            </div>
+
+            <!-- Parameter Sweep Heatmap -->
+            <div id="heatmap-section" class="card mt-2 hidden">
+                <div class="section-title">Parameter Sweep Heatmap (gradeThreshold x technicalScoreMax - Win Rate)</div>
+                <div id="heatmap-container" style="overflow-x:auto;margin-top:.75rem"></div>
+            </div>
+
+            <!-- Trades Table -->
+            <div class="card mt-2">
+                <div class="flex justify-between items-center" style="margin-bottom:.75rem">
+                    <div class="section-title" style="margin-bottom:0">개별 거래 내역</div>
+                    <div class="flex items-center" style="gap:.5rem">
+                        <button id="btn-csv" class="btn-secondary" style="font-size:.8rem;padding:.25rem .6rem">CSV
+                            다운로드</button>
+                        <span id="trades-count" class="text-muted" style="font-size:.8rem"></span>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>종목</th>
+                                <th>진입일</th>
+                                <th>진입가</th>
+                                <th>청산가</th>
+                                <th>수익률</th>
+                                <th>Grade</th>
+                                <th>점수</th>
+                                <th>결과</th>
+                                <th>목표도달</th>
+                                <th>손절도달</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trades-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/backtest-results.js"></script>
+</body>
+
+</html>

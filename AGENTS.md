@@ -103,3 +103,139 @@
 - API keys stored in `.env` (gitignored). Users can also enter keys interactively via the CLI.
 - Config stored in `.dexter/settings.json` (gitignored).
 - Never commit or expose real API keys, tokens, or credentials.
+
+---
+
+## K-Dexter REST API Server
+
+K-Dexter extends the original Dexter CLI with a Hono-based REST API server (`src/server.ts`, port 3000).
+
+### Run
+
+```bash
+bun run src/server.ts
+```
+
+### K-Dexter Specific Environment Variables
+
+- `KIS_APP_KEY` / `KIS_APP_SECRET`: 한국투자증권 Open API 인증
+- `KIS_IS_PAPER_TRADING`: `true`면 모의투자 서버 사용 (기본: 실서버)
+- `PORT`: 서버 포트 (기본: 3000)
+
+### API Endpoints
+
+#### Stock Analysis
+
+**`POST /k-dexter/analyze/kr`** — 한국 주식 종합 분석
+
+```json
+// Request
+{ "symbol": "005930" }
+
+// Response
+{
+  "symbol": "005930",
+  "fundamentals": {
+    "per": 12.5, "pbr": 1.1, "eps": 7500, "bps": 50000,
+    "marketCap": 4000000, "roe": 15.0, "debt_ratio": 30.5, "op_margin": 18.2
+  },
+  "technicals": {
+    "ma20": 64000, "ma60": 62000, "ma120": 58000,
+    "rsi": 52.3, "mfi": 48.1, "atr": 1200
+  },
+  "investor_trend_ratios": {
+    "individual": 45.2, "foreigner": 32.1, "institution": 22.7
+  },
+  "scorer": {
+    "scores": { "trend": 2, "momentum": 1, "flow": 0, "risk": 0, "fundamental": 2, "total": 5 },
+    "state": "상승 추세 (저평가/우량)",
+    "strategy": { "short_term": "추격 매수 자제", "mid_term": "눌림목 분할 매수" }
+  },
+  "trade_signal": {
+    "signal": "BUY",
+    "swing_grade": "B",
+    "levels": { "aggressiveEntry": 65000, "target1": 69000, "stopLossAtr": 62000 },
+    "volume_profile": { "poc": 63500, "position": "above" },
+    "rationale": "..."
+  },
+  "valuation": {
+    "srim": {
+      "method": "S-RIM",
+      "inputs": { "bps": 50000, "eps": 7500, "roe": 15.0, "currentPrice": 65000, "roeSource": "direct" },
+      "scenarios": {
+        "conservative": { "coe": 0.12, "fairValue": 62500, "fairPBR": 1.25, "discount": 4.0 },
+        "base":         { "coe": 0.10, "fairValue": 75000, "fairPBR": 1.50, "discount": -13.33 },
+        "optimistic":   { "coe": 0.08, "fairValue": 93750, "fairPBR": 1.875, "discount": -30.67 }
+      },
+      "summary": {
+        "fairValueRange": { "min": 62500, "max": 93750 },
+        "assessment": "UNDERVALUED",
+        "confidence": "HIGH"
+      }
+    }
+  }
+}
+```
+
+> `valuation.srim` is `null` for ETFs or when BPS data is unavailable.
+> `discount` sign: negative = undervalued, positive = overvalued (relative to fair value).
+
+**`POST /k-dexter/analyze/us`** — 미국 주식 분석
+
+```json
+// Request
+{ "symbol": "NVDA", "exchange": "NAS" }
+// exchange: "NAS" | "NYS" | "AMS"
+```
+
+#### Backtest
+
+**`POST /k-dexter/backtest/run`** — 백테스트 실행
+
+```json
+// Request
+{
+  "universe": ["005930", "000660"],
+  "gradeFilter": ["A"],
+  "holdingPeriod": 10,
+  "weights": { "technicalScoreMax": 3, "rrScoreMax": 2, "volumeProfileMax": 2, "ma60Max": 1 },
+  "thresholds": { "A": 7, "B": 5, "C": 3 }
+}
+```
+
+**`POST /k-dexter/backtest/parameter-sweep`** — 파라미터 최적화
+
+**`GET  /k-dexter/backtest/results`** — 백테스트 결과 목록
+
+**`GET  /k-dexter/backtest/results/:id`** — 특정 결과 조회
+
+#### Dashboard
+
+**`GET /dashboard`** — 백테스트 대시보드 (정적 HTML)
+
+### S-RIM Valuation Formula
+
+```
+적정주가 = EPS / COE  (= BPS × ROE / COE)
+
+discount = (현재가 - 적정가) / 적정가 × 100
+  음수(-) = 저평가(UNDERVALUED)
+  양수(+) = 고평가(OVERVALUED)
+
+assessment (base COE=10% 기준):
+  discount < -5%  → UNDERVALUED
+  -5% ~ 10%       → FAIR
+  discount > 10%  → OVERVALUED
+```
+
+### Key Source Files (K-Dexter)
+
+- `src/server.ts` — Hono REST API 서버
+- `src/analysis/scorer.ts` — 5-factor 채점 (Trend/Momentum/Flow/Risk/Fundamental)
+- `src/analysis/signal-generator.ts` — Swing Grade + 매매 시그널
+- `src/analysis/valuation.ts` — S-RIM 적정주가 계산 (순수 함수)
+- `src/analysis/volume-profile.ts` — 매물대(POC/VAL/VAH) 계산
+- `src/tools/korea/analysis.ts` — KR 분석 오케스트레이터
+- `src/tools/korea/kis-client.ts` — KIS Open API 클라이언트
+- `src/tools/korea/kr-daily-financials.ts` — Naver Finance 크롤러
+- `src/backtest/` — 백테스트 엔진 (engine, stats, parameter-sweep)

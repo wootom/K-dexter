@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Dexter 백테스트</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <span class="brand">K-Dexter</span>
+        <a href="index.html" class="active">백테스트 설정</a>
+        <a href="results.html">결과</a>
+        <a href="live.html">실시간 추적</a>
+        <a href="manual.html">매뉴얼</a>
+    </nav>
+
+    <div class="container">
+        <div class="grid-2" style="gap:1.5rem;align-items:start">
+
+            <!-- 왼쪽: 설정 폼 -->
+            <div>
+                <div class="card mt-2">
+                    <div class="section-title">종목 유니버스</div>
+                    <div class="form-group">
+                        <label>종목코드 (쉼표 또는 줄바꿈으로 구분)</label>
+                        <textarea id="symbols"
+                            placeholder="005930&#10;000660&#10;035420&#10;051910&#10;006400"></textarea>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="section-title">Grade 필터 &amp; 보유기간</div>
+                    <div class="form-group">
+                        <label>진입 대상 Grade</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label"><input type="checkbox" id="grade-A" checked> A grade</label>
+                            <label class="checkbox-label"><input type="checkbox" id="grade-B"> B grade</label>
+                            <label class="checkbox-label"><input type="checkbox" id="grade-C"> C grade</label>
+                            <label class="checkbox-label"><input type="checkbox" id="grade-D"> D grade</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>보유 기간: <strong id="holding-period-val">10</strong> 거래일</label>
+                        <input type="range" id="holding-period" min="5" max="20" value="10">
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="section-title">가중치 조정</div>
+                    <div class="form-group">
+                        <label>Technical Score 가중치 (max): <strong id="w-tech-val">3</strong></label>
+                        <input type="range" id="w-tech" min="1" max="5" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label>R/R Score 가중치 (max): <strong id="w-rr-val">2</strong></label>
+                        <input type="range" id="w-rr" min="1" max="5" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label>Volume Profile 가중치 (max): <strong id="w-vp-val">2</strong></label>
+                        <input type="range" id="w-vp" min="1" max="5" value="2">
+                    </div>
+                    <div class="form-group">
+                        <label>MA60 가중치 (max): <strong id="w-ma60-val">1</strong></label>
+                        <input type="range" id="w-ma60" min="0" max="3" value="1">
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="section-title">Grade 임계값</div>
+                    <div class="form-group">
+                        <label>A grade 커트라인 (이상): <strong id="t-a-val">7</strong>점</label>
+                        <input type="range" id="t-a" min="4" max="10" value="7">
+                    </div>
+                    <div class="form-group">
+                        <label>B grade 커트라인 (이상): <strong id="t-b-val">5</strong>점</label>
+                        <input type="range" id="t-b" min="2" max="8" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label>C grade 커트라인 (이상): <strong id="t-c-val">3</strong>점</label>
+                        <input type="range" id="t-c" min="1" max="6" value="3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 실행 & 상태 -->
+            <div>
+                <div class="card mt-2">
+                    <div class="section-title">실행</div>
+                    <div class="alert alert-info" style="font-size:.8rem">
+                        <strong>백테스트 구간:</strong> 종목당 KIS API 200일 OHLCV 기준<br>
+                        MA120 워밍업(120일) + 10일 보유 버퍼 = 약 70 거래일(3.5개월) 유효 구간
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <button class="btn btn-primary" id="btn-run">▶ 백테스트 실행</button>
+                        <button class="btn btn-secondary" id="btn-sweep">▶ Parameter Sweep</button>
+                    </div>
+                    <div id="run-status" class="status-text mt-1"></div>
+                    <div id="progress-bar" class="progress-bar hidden mt-1">
+                        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <div class="section-title">안내</div>
+                    <ul style="padding-left:1.2rem;font-size:.82rem;color:#94a3b8;line-height:2">
+                        <li>KIS API 호출: 종목당 1회 (200일 OHLCV)</li>
+                        <li>50종목 기준 약 5~10초 소요 (API 딜레이 포함)</li>
+                        <li>Parameter Sweep: 324 조합 × 종목 (수 분 소요)</li>
+                        <li>Look-ahead bias 방지: 진입가 = 익일 시가</li>
+                        <li>fundamentals/시장흐름은 중립(0)으로 고정</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/backtest-config.js"></script>
+</body>
+
+</html>

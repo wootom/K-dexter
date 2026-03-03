@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Dexter 매뉴얼</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <span class="brand">K-Dexter</span>
+        <a href="index.html">백테스트 설정</a>
+        <a href="results.html">결과</a>
+        <a href="live.html">실시간 추적</a>
+        <a href="manual.html" class="active">매뉴얼</a>
+    </nav>
+
+    <div class="container">
+        <div class="card mt-2">
+            <div class="section-title" style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">K-Dexter 대시보드
+                사용 매뉴얼</div>
+
+            <div class="manual-section">
+                <h2>1. 개요 (Introduction)</h2>
+                <p>
+                    K-Dexter 백테스트 대시보드는 퀀트 투자 전략을 시뮬레이션하고 검증하기 위한 도구입니다.
+                    사용자는 관심 있는 종목(Universe)을 입력하고 다양한 필터와 가중치를 조절하여 과거 데이터 기반의 수익률 및 핵심 지표를 손쉽게 확인할 수 있습니다.
+                </p>
+            </div>
+
+            <div class="manual-section">
+                <h2>2. 백테스트 설정 (index.html)</h2>
+                <p>백테스트를 실행하기 전 모델의 동작 방식을 결정하는 화면입니다.</p>
+
+                <h3>2.1 종목 유니버스 (Universe)</h3>
+                <ul>
+                    <li>백테스트를 수행할 <span class="highlight">종목코드</span>를 입력합니다.</li>
+                    <li>구분은 쉼표(,) 또는 줄바꿈(Enter)으로 할 수 있습니다.</li>
+                    <li>예시: <span class="code-block">005930</span> (삼성전자), <span class="code-block">000660</span>
+                        (SK하이닉스)</li>
+                </ul>
+
+                <h3>2.2 Grade 필터 & 보유기간</h3>
+                <ul>
+                    <li><span class="highlight">진입 대상 Grade:</span> 분석 결과 도출되는 종목의 등급을 기준으로 매매에 진입할 대상을 선택합니다. (예: A, B
+                        등급만 매수)</li>
+                    <li><span class="highlight">보유 기간:</span> 매수 후 해당 종목을 보유할 거래일 수를 설정합니다. (5~20일) 보유 기간이 만료되면 다음 날 시가에
+                        청산합니다.</li>
+                </ul>
+
+                <h3>2.3 가중치 조정 (Weights)</h3>
+                <p>전체 점수를 산정할 때 각 요소(Factor)가 미치는 영향력을 결정합니다.</p>
+                <ul>
+                    <li><span class="highlight">Technical Score 가중치:</span> 기술적 지표(RSI, MACD 등)의 중요도 (최대 5)</li>
+                    <li><span class="highlight">R/R (Risk/Reward) Score 가중치:</span> 손익비 지표의 중요도 (최대 5)</li>
+                    <li><span class="highlight">Volume Profile 가중치:</span> 거래량 분포 및 매물대 지표의 중요도 (최대 5)</li>
+                    <li><span class="highlight">MA60 가중치:</span> 60일 이동평균선 기반 추세의 중요도 (최대 3)</li>
+                </ul>
+
+                <h3>2.4 Grade 임계값 (Thresholds)</h3>
+                <p>각 요소에 가중치를 곱하여 합산된 <span class="highlight">총점</span>을 기준으로 종목의 등급(Grade)을 분류하는 기준선입니다.</p>
+                <ul>
+                    <li><span class="highlight">A grade 커트라인:</span> 최우수 종목으로 분류할 최소 점수</li>
+                    <li><span class="highlight">B grade 커트라인:</span> 우수 종목으로 분류할 최소 점수</li>
+                    <li><span class="highlight">C grade 커트라인:</span> 보통 종목으로 분류할 최소 점수</li>
+                    <li>C 임계값 미만은 모두 D grade(위험/진입 불가)로 분류됩니다.</li>
+                </ul>
+
+                <h3>2.5 실행 (Execution)</h3>
+                <ul>
+                    <li><span class="highlight">▶ 백테스트 실행:</span> 현재 설정된 단일 값들을 사용하여 백테스트를 즉시 실행합니다.</li>
+                    <li><span class="highlight">▶ Parameter Sweep:</span> Grade 임계값과 주요 가중치들을 내부적으로 여러 조합으로 변경해가며 최적의
+                        파라미터를 찾는 시뮬레이션을 수행합니다. (실행 시간이 길 수 있습니다.)</li>
+                </ul>
+            </div>
+
+            <div class="manual-section">
+                <h2>3. 결과 확인 (results.html)</h2>
+                <p>진행된 백테스트의 성과를 시각적으로 분석하는 화면입니다.</p>
+
+                <h3>3.1 요약 지표 (Summary Metrics)</h3>
+                <ul>
+                    <li><span class="highlight">총 거래:</span> 백테스트 기간 동안 발생한 전체 매매 횟수</li>
+                    <li><span class="highlight">승률:</span> 수익으로 마감한 거래의 비율 (%)</li>
+                    <li><span class="highlight">평균 수익률:</span> 1회 거래당 평균적으로 얻은 수익률 (%)</li>
+                    <li><span class="highlight">최대 낙폭(MDD):</span> 계좌 잔고가 최고점에서 가장 많이 하락한 비율 (-%)</li>
+                    <li><span class="highlight">Sharpe Ratio:</span> 감수한 위험 대비 초과 수익률. 수치가 높을수록 안정적이고 우수한 전략입니다.</li>
+                    <li><span class="highlight">목표/손절 도달률:</span> 보유 기간 내에 설정된 목표가 또는 손절가에 도달한 비율</li>
+                    <li><span class="highlight">Profit Factor:</span> 총 수익금을 총 손실금으로 나눈 비율. 1.0 이상이어야 수익 창출 전략입니다.</li>
+                </ul>
+
+                <h3>3.2 차트 (Charts)</h3>
+                <ul>
+                    <li><span class="highlight">Equity Curve (누적 수익률):</span> 시간이 지남에 따른 계좌 누적 수익률의 변화를 선 그래프로 보여줍니다.
+                    </li>
+                    <li><span class="highlight">Grade별 성과:</span> A, B, C 등급별 거래 횟수 및 수익률 차이를 막대 그래프로 비교합니다.</li>
+                    <li><span class="highlight">Factor 기여도:</span> 개별 점수(기술적, R/R 등)와 실제 수익률 간의 상관관계를 보여줍니다. 양수(+)면 해당
+                        점수가 높을 때 수익도 높았음을 의미합니다.</li>
+                    <li><span class="highlight">Parameter Sweep Heatmap:</span> 설정 폼에서 'Parameter Sweep'을 실행했을 때만 나타나며,
+                        다양한 파라미터 조합 중 어느 영역의 승률이 가장 높은지 색상(히트맵)으로 표현합니다.</li>
+                </ul>
+
+                <h3>3.3 개별 거래 내역</h3>
+                <p>모든 진입, 청산 거래의 세부 기록을 표 형태로 제공하며, 우측 상단의 <span class="highlight">CSV 다운로드</span> 버튼을 통해 엑셀 등에서 사용할 수
+                    있는 파일로 저장할 수 있습니다.</p>
+            </div>
+
+            <div class="manual-section">
+                <h2>4. 실시간 추적 (live.html)</h2>
+                <p>
+                    현재 개발 중인 기능입니다. 향후 백테스트에서 검증된 전략을 바탕으로, 매일 장 종료 후 실제 종목들의 점수(Grade)를 스냅샷으로 저장 및 추적하고, 다음 날의 추천 진입
+                    종목이나 현재 보유 종목의 상태를 실시간으로 모니터링할 수 있는 대시보드가 제공될 예정입니다.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

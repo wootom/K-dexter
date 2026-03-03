@@ -1,0 +1,182 @@
+{
+  "timestamp": "2026-03-02T05:03:34.919Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-02T04:57:22.938Z",
+    "activeFeatures": [
+      "grade-algo-improvement",
+      "backtest",
+      "analysis",
+      "K-dexter",
+      "js"
+    ],
+    "primaryFeature": "grade-algo-improvement",
+    "features": {
+      "grade-algo-improvement": {
+        "phase": "check",
+        "startedAt": "2026-02-27T00:00:00.000Z",
+        "lastUpdated": "2026-03-02T05:10:00.000Z",
+        "matchRate": 88.8,
+        "iterationCount": 0,
+        "planPath": "docs/01-plan/features/grade-algo-improvement.plan.md",
+        "designPath": "docs/02-design/features/grade-algo-improvement.design.md",
+        "analysisPath": "docs/03-analysis/grade-algo-improvement.analysis.md"
+      },
+      "backtest": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-02T04:51:13.105Z",
+          "lastUpdated": "2026-03-02T04:55:07.091Z"
+        },
+        "lastFile": "/Users/woojanghoon/Documents/Code/K-dexter/src/backtest/index.ts"
+      },
+      "analysis": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-02T04:51:23.877Z",
+          "lastUpdated": "2026-03-02T04:51:45.966Z"
+        },
+        "lastFile": "/Users/woojanghoon/Documents/Code/K-dexter/src/analysis/signal-generator.ts"
+      },
+      "K-dexter": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-02T04:55:21.304Z",
+          "lastUpdated": "2026-03-02T04:55:36.963Z"
+        },
+        "lastFile": "/Users/woojanghoon/Documents/Code/K-dexter/src/server.ts"
+      },
+      "js": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-02T04:55:53.292Z",
+          "lastUpdated": "2026-03-02T04:57:22.938Z"
+        },
+        "lastFile": "/Users/woojanghoon/Documents/Code/K-dexter/public/dashboard/js/backtest-results.js"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-02-27T05:39:48.656Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-02T04:57:22.938Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-02T04:51:13.105Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:51:23.877Z",
+        "feature": "analysis",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:51:40.567Z",
+        "feature": "analysis",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:51:45.966Z",
+        "feature": "analysis",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:52:18.191Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:52:26.382Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:54:13.781Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:55:00.735Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:55:07.091Z",
+        "feature": "backtest",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:55:21.304Z",
+        "feature": "K-dexter",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:55:36.963Z",
+        "feature": "K-dexter",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:55:53.292Z",
+        "feature": "js",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:56:00.477Z",
+        "feature": "js",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:56:52.148Z",
+        "feature": "js",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-02T04:57:22.938Z",
+        "feature": "js",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}

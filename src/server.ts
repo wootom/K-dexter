@@ -245,5 +245,6 @@ app.get('/k-dexter/backtest/results/:id', async (c) => {
 // 10. Export for Bun
 export default {
     port: PORT,
+    hostname: '0.0.0.0', // Allow external access via Tailscale or other interfaces
     fetch: app.fetch,
 };
